@@ -1,6 +1,6 @@
 language: node_js
 addons:
-  firefox: latest
+  firefox: latest-nightly
 node_js:
 - '6'
 before_install:
