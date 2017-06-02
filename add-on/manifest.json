@@ -2,16 +2,15 @@
   "applications": {
     "gecko": {
       "id": "examplewebextension@mozilla.org",
-        "strict_min_version": "48.0"
+        "strict_min_version": "54.0a1"
     }
   },
   "background": {
     "scripts": ["main.js"]
   },
-  "browser_action": {
-    "browser_style": true,
-    "default_icon": "img/firefox-logo.svg",
-    "default_title": "__MSG_buttonTitle__"
+  "sidebar_action": {
+    "default_title" : "__MSG_sidebarTitle__",
+    "default_panel": "sidebar/panel.html"
   },
 
   "default_locale": "en-US",
@@ -20,9 +19,18 @@
 
   "manifest_version": 2,
 
-  "name": "Example WebExtension",
+  "name": "MDN Doc Linter",
 
-  "permissions": [],
+  "permissions": [
+    "*://developer.mozilla.org/*",
+    "webNavigation",
+    "tabs"
+  ],
 
+  "page_action": {
+    "browser_style": true,
+    "default_icon":  "img/page_action_32.png",
+    "default_title": "__MSG_pageActionTitle__"
+  },
   "version": "0.0.1"
 }

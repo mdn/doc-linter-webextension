@@ -10,5 +10,21 @@
   "buttonTitle": {
     "message": "Visitez Mozilla",
     "description": "Description shown on the toolbar when hovered. DO NOT localise 'Mozilla'."
+  },
+  "sidebarTitle": {
+    "message": "Linter de documentation MDN",
+    "description": "Title of the Sidebar"
+  },
+  "pageActionTitle": {
+    "message": "Linter de documentation MDN",
+    "description": "Title of the pageAction"
+  },
+  "panelDefaultMessage": {
+    "message": "Edite un document MDN et teste le :",
+    "description": "Default message inside the panel"
+  },
+  "buttonRunTests": {
+    "message": "Lancer les tests",
+    "description": "Content of the button to run the test suite"
   }
 }
