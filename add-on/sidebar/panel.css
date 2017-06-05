@@ -72,7 +72,7 @@ li {
   list-style-type: none;
 }
 
-#tests {
+.tests-list {
   width: 100%;
   margin-block-start: 0;
   margin-block-end: 0;

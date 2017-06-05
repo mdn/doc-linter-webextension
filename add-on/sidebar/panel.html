@@ -8,6 +8,19 @@
   <body>
     <p data-i18n="panelDefaultMessage"></p>
     <button id="btn-runtests" data-i18n="buttonRunTests"></button>
+
+    <div id="summary">
+      <p><span data-i18n="errors"></span><span id="totalErrorCount" class="errorCount">0</span></p>
+      <p><span data-i18n="warnings"></span><span id="totalWarningCount" class="errorCount">0</span></p>
+    </div>
+
+    <progress id="testProgress" max="100"></progress>
+
+    <ul id="tests-errors" class="tests-list"></ul>
+    <ul id="tests-warnings" class="tests-list"></ul>
+    <ul id="tests-infos" class="tests-list"></ul>
+
+    <button id="fixIssues" data-i18n="fix_issues">Fix issues</button>
   </body>
 
   <script src="panel.js"></script>
