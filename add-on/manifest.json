@@ -6,8 +6,12 @@
     }
   },
   "background": {
-    "scripts": ["main.js"]
+    "scripts": ["main.js", "/tests/testlist.js"]
   },
+  "content_scripts": [{
+    "matches": ["*://developer.mozilla.org/*"],
+    "js": ["worker.js", "/tests/doctests.js"]
+  }],
   "sidebar_action": {
     "default_title" : "__MSG_sidebarTitle__",
     "default_panel": "sidebar/panel.html"
@@ -23,6 +27,7 @@
 
   "permissions": [
     "*://developer.mozilla.org/*",
+    "activeTab",
     "webNavigation",
     "tabs"
   ],
