@@ -26,5 +26,17 @@
   "buttonRunTests": {
     "message": "Run tests",
     "description": "Content of the button to run the test suite"
+  },
+  "errors": {
+    "message": "Errors",
+    "description": "Errors tag on the result layout"
+  },
+  "warnings": {
+    "message": "Warnings",
+    "description": "Warnings tag on the result layout"
+  },
+  "fix_issues": {
+    "message": "Fix issues",
+    "description": "Label for button allowing to fix the matched errors and warnings"
   }
 }
