@@ -27,16 +27,332 @@
     "message": "Run tests",
     "description": "Content of the button to run the test suite"
   },
+  "sidebar_description": {
+    "message": "Edit an MDN document and test it against the test suite:",
+    "description": "Sidebar description"
+  },
+  "run_tests": {
+    "message": "Run tests",
+    "description": "Label for button allowing to run the test suite"
+  },
   "errors": {
-    "message": "Errors",
-    "description": "Errors tag on the result layout"
+    "message": "Errors:",
+    "description": "Label for the number of errors"
   },
   "warnings": {
-    "message": "Warnings",
-    "description": "Warnings tag on the result layout"
+    "message": "Warnings:",
+    "description": "Label for the number of warnings"
   },
   "fix_issues": {
     "message": "Fix issues",
     "description": "Label for button allowing to fix the matched errors and warnings"
+  },
+  "old_en_urls": {
+    "message": "Old '/en/' URLs",
+    "description": "Name of test checking old en/ URLs"
+  },
+  "old_en_urls_desc": {
+    "message": "URLs starting with /en/ are obsolete. /en-US/docs/ should be used instead.",
+    "description": "Description of test checking for old en/ URLs"
+  },
+  "absolute_urls_for_internal_links": {
+    "message": "Absolute URLs for internal links",
+    "description": "Name of test checking whether internal links contain absolute URLs"
+  },
+  "absolute_urls_for_internal_links_desc": {
+    "message": "Internal links should use a relative URL path instead of an absolute one.",
+    "description": "Description of test checking whether internal links contain absolute URLs"
+  },
+  "different_locale_links": {
+    "message": "Different locale links",
+    "description": "Name of test checking whether there are any links to different locales"
+  },
+  "different_locale_links_desc": {
+    "message": "There should not be any links pointing to other locales.",
+    "description": "Description of test checking whether internal links contain absolute URLs"
+  },
+  "empty_elements": {
+    "message": "Empty elements",
+    "description": "Name of test checking for empty elements"
+  },
+  "empty_elements_desc": {
+    "message": "Empty elements like e.g. <p></p> should be removed.",
+    "description": "Description of test checking for empty elements"
+  },
+  "empty_brackets": {
+    "message": "Empty brackets",
+    "description": "Name of test checking for empty brackets"
+  },
+  "empty_brackets_desc": {
+    "message": "Macros that don't have parameters like {{foo()}} don't need parameter list brackets. Therefore they should be removed.",
+    "description": "Description of test checking for empty brackets"
+  },
+  "style_attributes": {
+    "message": "Style attributes",
+    "description": "Name of test checking for 'style' HTML attributes"
+  },
+  "style_attributes_desc": {
+    "message": "HTML elements should not contain 'style' attributes for styling but use classes instead. So, they should be removed when possible.",
+    "description": "Description of test checking for 'style' HTML attributes"
+  },
+  "name_attributes": {
+    "message": "Name attributes",
+    "description": "Name of test checking for 'name' HTML attributes"
+  },
+  "name_attributes_desc": {
+    "message": "HTML elements should not contain 'name' attributes but use ids instead. So, they should be removed.",
+    "description": "Description of test checking for 'name' HTML attributes"
+  },
+  "span_elements": {
+    "message": "<span> elements",
+    "description": "Name of test checking for <span> elements"
+  },
+  "span_elements_desc": {
+    "message": "Using <span> elements should be avoided and other elements be used instead, e.g. <p> or <code>.",
+    "description": "Description of test checking for <span> elements"
+  },
+  "pre_without_class": {
+    "message": "<pre> w/o class",
+    "description": "Name of test checking for <pre> elements without 'class' attribute"
+  },
+  "pre_without_class_desc": {
+    "message": "<pre> elements must have a 'class' attribute assigned in most cases, so their syntax is highlighted.",
+    "description": "Description of test checking for <pre> elements without 'class' attribute"
+  },
+  "summary_heading": {
+    "message": "Summary heading",
+    "description": "Name of test checking for summary heading"
+  },
+  "summary_heading_desc": {
+    "message": "According to the article style guide there shouldn't be a <hx>Summary</hx> heading.",
+    "description": "Description of test checking for summary heading"
+  },
+  "example_headings": {
+    "message": "'Example:' headings",
+    "description": "Name of test checking for 'Example:' headings"
+  },
+  "example_headings_desc": {
+    "message": "Example headings should not include 'Example: '. E.g. instead of <h3>Example: Foobar</h3> just use <h3>Foobar</h3>.",
+    "description": "Description of test checking for 'Example:' headings"
+  },
+  "alert_print_in_code": {
+    "message": "alert, print, eval, document.write",
+    "description": "Name of test checking for alert(), print(), eval() and document.write() within code samples"
+  },
+  "alert_print_in_code_desc": {
+    "message": "Don't use alert(), print(), eval() or document.write() in code samples.",
+    "description": "Description of test checking for alert(), print(), eval() and document.write() within code samples"
+  },
+  "shell_prompts": {
+    "message": "Shell prompts in code samples",
+    "description": "Name of test checking for shell prompts within code samples"
+  },
+  "shell_prompts_desc": {
+    "message": "Don't start shell instructions with '$' or '>'. It confuses more than it helps and causes problems when copying them.",
+    "description": "Description of test checking for shell prompts within code samples"
+  },
+  "html_comments": {
+    "message": "HTML comments",
+    "description": "Name of test checking for HTML comments"
+  },
+  "html_comments_desc": {
+    "message": "HTML comments are not visible in WYSIWYG mode and in reading mode. They are not meant to comment the documentation, so they should be removed.",
+    "description": "Description of test checking for HTML comments"
+  },
+  "font_elements": {
+    "message": "<font> elements",
+    "description": "Name of test checking for <font> elements"
+  },
+  "font_elements_desc": {
+    "message": "Using <font> elements is obsolete. Either the tag should be removed completely or replaced by CSS.",
+    "description": "Description of test checking for <font> elements"
+  },
+  "http_links": {
+    "message": "HTTP links",
+    "description": "Name of test checking for HTTP links"
+  },
+  "http_links_desc": {
+    "message": "URLs to external resources should use HTTPS instead of HTTP, when possible.",
+    "description": "Description of test checking for HTTP links"
+  },
+  "data_macro_note": {
+    "message": "Data macro note ",
+    "description": "Name of test checking the notes for data macros linking to the data source"
+  },
+  "data_macro_note_desc": {
+    "message": "Data macros need a note above them linking to the data source.",
+    "description": "Description of test checking the notes for data macros linking to the data source"
+  },
+  "unnecessary_macro_params": {
+    "message": "Unnecessary macro parameters",
+    "description": "Name of test checking for macros with unnecessary parameters"
+  },
+  "unnecessary_macro_params_desc": {
+    "message": "The used macro does not require any parameters, so they should be removed.",
+    "description": "Description of test checking for macros with unnecessary parameters"
+  },
+  "macro_syntax_error": {
+    "message": "Macro syntax error",
+    "description": "Name of test checking for macro syntax errors"
+  },
+  "macro_syntax_error_desc": {
+    "message": "A macro has a syntax error like a missing closing bracket, e.g. {{jsxref('Array'}}.",
+    "description": "Description of test checking for macro syntax errors"
+  },
+  "invalid_macros": {
+    "message": "Invalid macros",
+    "description": "Name of test checking for invalid macros"
+  },
+  "invalid_macros_desc": {
+    "message": "The used macro is not allowed or does not exist",
+    "description": "Description of test checking for invalid macros"
+  },
+  "incorrectly_wrapped_sidebar_macros": {
+    "message": "Incorrectly wrapped sidebar macros",
+    "description": "Name of test checking incorrectly wrapped sidebar macros"
+  },
+  "incorrectly_wrapped_sidebar_macros_desc": {
+    "message": "Sidebar macros must be wrapped into <div> elements",
+    "description": "Description of test checking incorrectly wrapped sidebar macros"
+  },
+  "wrong_highlighted_line": {
+    "message": "Wrong highlighted line",
+    "description": "Name of test checking for wrong highlighted line within code samples"
+  },
+  "wrong_highlighted_line_desc": {
+    "message": "A code block has a line highlighted that is outside the range of code lines.",
+    "description": "Description of test checking for wrong highlighted line within code samples"
+  },
+  "api_syntax_headlines": {
+    "message": "API syntax headlines",
+    "description": "Name of test checking the order and names of API syntax headlines"
+  },
+  "api_syntax_headlines_desc": {
+    "message": "API syntax headlines must be 'Parameters', 'Return value' and 'Exceptions', in that order, not 'Returns', 'Errors' or 'Errors thrown'.",
+    "description": "Description of test checking the order and names of API syntax headlines"
+  },
+  "code_in_pre": {
+    "message": "<code> in <pre>",
+    "description": "Name of test checking whether there are <code> tags within <pre> blocks"
+  },
+  "code_in_pre_desc": {
+    "message": "<code> tags should not be used within <pre> blocks, because they break syntax highlighting.",
+    "description": "Description of test checking whether there are <code> tags within <pre> blocks"
+  },
+  "pre_line_too_long": {
+    "message": "Line length in <pre> too long",
+    "description": "Name of test checking whether there are too long lines within <pre> blocks"
+  },
+  "pre_line_too_long_desc": {
+    "message": "To avoid horizontal scrollbars, there should be maximal 77 characters per line in <pre> blocks.",
+    "description": "Description of test checking whether there are too long lines within <pre> blocks"
+  },
+  "wrong_syntax_class": {
+    "message": "Wrong syntax class",
+    "description": "Name of test checking whether the CSS class for the syntax definition block is correct"
+  },
+  "wrong_syntax_class_desc": {
+    "message": "The CSS class used for the syntax definition block must be 'syntaxbox'.",
+    "description": "Description of test checking whether the CSS class for the syntax definition block is correct"
+  },
+  "url_in_link_title": {
+    "message": "URL in 'title' attribute",
+    "description": "Name of test checking whether there is a URL within the 'title' attribute of a link"
+  },
+  "url_in_link_title_desc": {
+    "message": "The URL of a link is already shown on hover, so repeating it within its 'title' attribute is redundant and should be avoided.",
+    "description": "Description of test checking whether there is a URL within the 'title' attribute of a link"
+  },
+  "article_length": {
+    "message": "Article length",
+    "description": "Name of test checking the length of the article"
+  },
+  "article_length_desc": {
+    "message": "Hints regarding the length of the article.",
+    "description": "Description of test checking the length of the article"
+  },
+  "link_using_wrong_locale": {
+    "message": "Link %s uses wrong locale. Expected '%s'.",
+    "description": "Error message for link using wrong locale"
+  },
+  "data_macro_note_missing": {
+    "message": "The data macro %s is missing a note linking to the data source. The note needs to be hidden using 'class=\"hidden\"'.",
+    "description": "Error message for data macro missing a note above it linking to the data source"
+  },
+  "data_macro_source_link_missing": {
+    "message": "The note for the data macro %s is missing a link to the data source.",
+    "description": "Error message for data macro note missing a link referring to the data source"
+  },
+  "macro_with_unnecessary_params_equalling_slug": {
+    "message": "The parameters of the %s macro are unnecessary, because they will be fetched from the slug, so they should be removed.",
+    "description": "Error message for macro with unnecessary parameters equalling slug"
+  },
+  "macro_with_unused_params": {
+    "message": "The parameters of the %s macro are unused, so they should be removed.",
+    "description": "Error message for macro with unused parameters"
+  },
+  "missing_closing_curly_brace": {
+    "message": "Macro is missing a closing curly brace: %s",
+    "description": "Error message for macro missing closing curly brace"
+  },
+  "missing_closing_bracket": {
+    "message": "Parameters list is missing closing bracket: %s",
+    "description": "Error message for macro missing a closing bracket"
+  },
+  "string_parameter_incorrectly_quoted": {
+    "message": "String parameter is not quoted correctly: %s",
+    "description": "Error message for macro string parameter not being quoted correctly"
+  },
+  "additional_closing_bracket": {
+    "message": "Macro has additional closing bracket(s): %s",
+    "description": "Error message for macro having additional closing brackets"
+  },
+  "wrong_element_wrapping_sidebar_macro": {
+    "message": "Sidebar macro %s is wrapped into <%s> element",
+    "description": "Error message for sidebar macro wrapped into wrong element"
+  },
+  "obsolete_macro": {
+    "message": "The %s macro is obsolete and should be removed.",
+    "description": "Error message for obsolete macro"
+  },
+  "highlighted_line_number_not_positive": {
+    "message": "Highlighted line number %s must be positive: %s",
+    "description": "Error message for highlighted line number being zero or negative"
+  },
+  "highlighted_line_number_too_big": {
+    "message": "Highlighted line number %s exceeds the line count of %s: %s",
+    "description": "Error message for highlighted line number exceeding the line count of the code sample"
+  },
+  "invalid_highlighted_range": {
+    "message": "End of highlighted line range %s bigger than its start %s: %s",
+    "description": "Error message for highlighted line number range being invalid (start of range bigger than end of range)"
+  },
+  "invalid_headline_name": {
+    "message": "Invalid name '%s'",
+    "description": "Error message for invalid headline name"
+  },
+  "invalid_headline_order": {
+    "message": "Invalid order",
+    "description": "Error message for invalid headline order"
+  },
+  "wrong_syntax_class_used": {
+    "message": "The CSS class '%s' used for the syntax definition block is wrong. It must be 'syntaxbox'.",
+    "description": "Error message for invalid CSS class for the syntax definition block"
+  },
+  "article_length_info": {
+    "message": "The article has %s words. Estimated read time: %s minute(s).",
+    "description": "Info message for article length and reading time estimation"
+  },
+  "long_article": {
+    "message": "The article is very long. Consider to split it up into smaller articles.",
+    "description": "Error message for long article"
+  },
+  "autoExpandErrors_title": {
+    "message": "Automatically expand errors",
+    "description": "Title of 'autoExpandErrors' property (shown in Add-ons Manager)"
+  },
+  "autoExpandErrors_description": {
+    "message": "Immediately display errors and warnings returned by a test when running the test suite.",
+    "description": "Description of 'autoExpandErrors' property (shown in Add-ons Manager)"
   }
 }
