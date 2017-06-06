@@ -35,11 +35,10 @@ function runTests() {
   let iframe = document.querySelector("iframe.cke_wysiwyg_frame");
   if (iframe) {
     let rootElement = iframe.contentDocument.body;
-    // Currently contains an empty object coming from tests/doctests.js
-    // TODO: Find why this Object is empty
+    // docTests is filed by the test dynamically loaded in main.js -> loadTests()
     Object.keys(docTests).forEach(key => runTest(docTests[key], key, rootElement));
   }
-  this.port.postMessage({type: "finishedTests"});
+  port.postMessage({type: "finishedTests"});
 }
 
 /*
@@ -73,11 +72,14 @@ port.onMessage.addListener(message => {
       docTests.forEach((element, index) => fixIssues(element, index));
       break;
     default:
-            // TODO:
+      // TODO:
       break;
   }
 });
 
+/*
+ * Run the tests suits when there is content change in CKEditor
+ */
 function initializeKeyEventHandler() {
   let iframe = document.querySelector("iframe.cke_wysiwyg_frame");
   iframe.contentWindow.addEventListener("keyup", () => (runTestsTimeout = window.setTimeout(runTests, RUN_TESTS_DELAY)));
@@ -88,6 +90,9 @@ function initializeKeyEventHandler() {
   ckeditor.addEventListener("keydown", () => (window.clearTimeout(runTestsTimeout)));
 }
 
+/*
+ * Enable spellchecking in CKEditor
+ */
 window.addEventListener("load", function injectIFrame() {
   window.removeEventListener("load", injectIFrame);
 
