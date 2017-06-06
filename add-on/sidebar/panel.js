@@ -208,6 +208,7 @@ function generateEntry(error, id) {
 /*
  * Fill the HTML lists with the errors and make it visible
  */
+/*
 function displayTestResults(results) {
   let errors = [];
   let warnings = [];
@@ -248,6 +249,7 @@ function displayTestResults(results) {
   warningList.classList.add("visible");
   infoList.classList.add("visible");
 }
+*/
 
 /*
  * Event listeners
@@ -257,29 +259,17 @@ document.addEventListener("DOMContentLoaded", event => {
   // localization
   let elements = document.querySelectorAll("[data-i18n]");
   [].forEach.call(elements, element => {
-    element.textContent = chrome.i18n.getMessage(element.dataset.i18n);
+    element.textContent = browser.i18n.getMessage(element.dataset.i18n);
   });
-
-  let fakeResults = [
-    {name: "test", msg: "This is a test Error", type: ERROR},
-    {name: "test", msg: "This is a second test Error", type: ERROR},
-    {name: "test", msg: "This is a test Warning", type: WARNING},
-    {name: "test", msg: "This is a test Info", type: INFO},
-    {name: "test", msg: "This is a second test Warning", type: WARNING},
-    {name: "test", msg: "This is a test second test Info", type: INFO}
-  ];
-  displayTestResults(fakeResults);
 });
 
 /*
  * Process the result from the test.
  */
 function processTestResult(testObj, id) {
-  console.log(testObj);
-  /* 
-   * TODO: localize testObj.name et testObj.description
-   * See https://github.com/Elchi3/mdn-doc-tests/blob/c8dc3dc6131826b32aeea69a4a5fcae1f30111d1/lib/main.js#L47
-   */
+  testObj.name = browser.i18n.getMessage(testObj.name);
+  testObj.desc = browser.i18n.getMessage(testObj.desc);
+
   testObj.errors.forEach((error, index, errors) => {
     errors[index] = {
       msg: [error.msg].concat(error.msgParams),
@@ -334,30 +324,8 @@ window.addEventListener("DOMContentLoaded", function loadTestSuite() {
   document.getElementById("btn-runtests").addEventListener("click", event => runTests());
   document.getElementById("fixIssues").addEventListener("click", event => this.port.postMessage({type: "fixIssues"}));
 
-  let testsErrors = document.getElementById("tests-errors");
-  testsErrors.addEventListener("click", evt => {
-    let testHeading = getParentByClassName(evt.originalTarget, "testHeading");
-    if (testHeading) {
-      let testElem = getParentByClassName(testHeading, "test");
-      if (!testElem.classList.contains("ok")) {
-        testElem.getElementsByClassName("errors")[0].classList.toggle("show");
-      }
-    }
-  });
-
-  let testsWarnings = document.getElementById("tests-warnings");
-  testsWarnings.addEventListener("click", evt => {
-    let testHeading = getParentByClassName(evt.originalTarget, "testHeading");
-    if (testHeading) {
-      let testElem = getParentByClassName(testHeading, "test");
-      if (!testElem.classList.contains("ok")) {
-        testElem.getElementsByClassName("errors")[0].classList.toggle("show");
-      }
-    }
-  });
-
-  let testsInfos = document.getElementById("tests-infos");
-  testsInfos.addEventListener("click", evt => {
+  let tests = document.getElementById("tests");
+  tests.addEventListener("click", evt => {
     let testHeading = getParentByClassName(evt.originalTarget, "testHeading");
     if (testHeading) {
       let testElem = getParentByClassName(testHeading, "test");
