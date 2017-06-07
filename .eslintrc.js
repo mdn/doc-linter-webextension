@@ -9,7 +9,17 @@ module.exports = {
     "mocha": true,
     "node": true
   },
-  "globals": {"chrome": true, "browser": true},
+  "globals": {
+    "chrome": true,
+    "browser": true,
+    "WARNING": true,
+    "ERROR": true,
+    "INFO": true,
+    "docTests": true,
+    "testList": true,
+    "mapMatches": true,
+    "isNewParagraphHelper": true
+  },
   "plugins": [
     "json",
     "mocha",

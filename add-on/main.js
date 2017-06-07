@@ -30,5 +30,3 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 browser.pageAction.onClicked.addListener(tab => {
   // TODO
 });
-
-

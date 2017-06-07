@@ -7,7 +7,7 @@
  *
  *  Example 3: {{macro("param"))}} has an additional closing bracket, so it will be recognized as error.
  *
- *  Example 4: {{macro('param)}} and {{macro(param")}} have incorrectly quoted string parameters, 
+ *  Example 4: {{macro('param)}} and {{macro(param")}} have incorrectly quoted string parameters,
  *  so they will be recognized as errors.
  *
  *  Implementation notes: This test uses regular expressions to recognize invalid macros.
@@ -36,35 +36,32 @@ docTests.macroSyntaxError = {
           } else if (stringParamQuote === "'" && macro[i - 1] !== "\\") {
             stringParamQuote = "";
           }
-        } else if (stringParamQuote === "" && macro[i].match(/[^\s,\d\-\.]/)) {
+        } else if (stringParamQuote === "" && macro[i].match(/[^\s,\d\-.]/)) {
           return false;
         }
       }
       return stringParamQuote === "";
     }
-    
+
     let treeWalker = document.createTreeWalker(
         rootElement,
         NodeFilter.SHOW_TEXT,
-        {
-          acceptNode: (node) => {
-            return node.textContent.match(/\{\{[^\(\}]*\([^\}]*\}\}|\{\{[^\}]*?\}(?:(?=[^\}])|$)/) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-          }
-        }
+        // eslint-disable-next-line
+      {acceptNode: node => node.textContent.match(/\{\{[^\(\}]*\([^\}]*\}\}|\{\{[^\}]*?\}(?:(?=[^\}])|$)/) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT}
     );
     let matches = [];
 
-    while(treeWalker.nextNode()) {
-      let textNodeMatches = treeWalker.currentNode.textContent.match(/\{\{[^\(\}]*\([^\}]*\}\}|\{\{[^\}]*?\}(?:(?=[^\}])|$)/gi) || [];
+    while (treeWalker.nextNode()) {
+      let textNodeMatches = treeWalker.currentNode.textContent.match(/\{\{[^(}]*\([^}]*\}\}|\{\{[^}]*?\}(?:(?=[^}])|$)/gi) || [];
       textNodeMatches.forEach(macro => {
-        if (macro.match(/[^\}]\}$/)) {
+        if (macro.match(/[^}]\}$/)) {
           matches.push({
             msg: "missing_closing_curly_brace",
             msgParams: [macro],
             type: ERROR
           });
         }
-        if (macro.match(/^\{\{[^\(]+\(.+?[^\)\s]\s*\}\}$/)) {
+        if (macro.match(/^\{\{[^(]+\(.+?[^)\s]\s*\}\}$/)) {
           matches.push({
             msg: "missing_closing_bracket",
             msgParams: [macro],

@@ -3,8 +3,8 @@
  *
  *  Example 1: An MDN link to the 'display' CSS property should use a the relative URL
  *  /en-US/docs/Web/CSS/display and not the absolute URL
- *  https://developer.mozilla.org/en-US/docs/Web/CSS/display. 
- * 
+ *  https://developer.mozilla.org/en-US/docs/Web/CSS/display.
+ *
  *  Implementation notes: This test checks whether the URL begins with the link
  *  "https://developer.mozilla.org/", this means that allizom.org links are not covered.
  *  window.location cannot be used for this, because that would break the unit test, which uses

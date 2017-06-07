@@ -1,3 +1,4 @@
+/* eslint-disable */
 const testList = [
   "old-urls.js",
   "absolute-urls-for-internal-links.js",

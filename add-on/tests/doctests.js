@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Utilities for all tests
 
 const ERROR = 1;

@@ -1,10 +1,10 @@
 /*
  *  Title: Test for incorrectly 'style' attributes.
  *
- *  Example 1: <p style="font-style: italic;">Emphasized text/<p> should rather be replaced 
+ *  Example 1: <p style="font-style: italic;">Emphasized text/<p> should rather be replaced
  *  by <p>Emphasized text</p>.
  *
- *  Implementation notes: This test searches for all 'style' attributes, which are not part of 
+ *  Implementation notes: This test searches for all 'style' attributes, which are not part of
  *  CKEditor's new paragraph helper.
  */
 
@@ -24,9 +24,9 @@ docTests.styleAttribute = {
       }
 
       matches.push({
-        msg: 'style="' + node.getAttribute("style") + '"',
+        msg: `style="${node.getAttribute("style")}"`,
         type: ERROR
-      })
+      });
     }
 
     return matches;

@@ -3,10 +3,10 @@
  *
  *  Example 1: Code blocks with very long lines like
  *  <pre>This is some code block with a long line exceeding the maximum of 78 characters.</pre>
- *  should either be shortened or split into several lines to avoid the display of horizontal 
+ *  should either be shortened or split into several lines to avoid the display of horizontal
  *  scrollbars.
  *
- *  Implementation notes: This test uses a threshold of 78 characters for the maximum length of 
+ *  Implementation notes: This test uses a threshold of 78 characters for the maximum length of
  *  a line. <br> tags added while editing are replaced by line breaks and all other HTML tags
  *  are removed.
  */

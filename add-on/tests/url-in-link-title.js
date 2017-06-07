@@ -9,8 +9,8 @@
  *  <a href="/en-US/docs/Web/CSS" title="/en/docs/CSS">CSS</a>
  *  should be removed, because it's redundant and misleading.
  *
- *  Implementation notes: This test checks whether the 'title' attribute of an <a> element 
- *  contains the same URL or a part of it as within its 'href' attribute. It also handles URLs 
+ *  Implementation notes: This test checks whether the 'title' attribute of an <a> element
+ *  contains the same URL or a part of it as within its 'href' attribute. It also handles URLs
  *  using two-character locales vs. four character locales, e.g. "/en-US/" and "/en/".
  */
 

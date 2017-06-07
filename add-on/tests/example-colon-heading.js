@@ -23,7 +23,7 @@ docTests.exampleColonHeading = {
           node: headlines[i],
           msg: headlines[i].outerHTML,
           type: ERROR
-        })
+        });
       }
     }
 

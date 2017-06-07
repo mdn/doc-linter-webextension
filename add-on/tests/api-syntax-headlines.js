@@ -3,12 +3,12 @@
  *  'Return value' and 'Exceptions', and whether they appear in the correct order.
  *
  *  Example 1: The return value should have 'Return value' as headline and not 'Returns'.
- *  
+ *
  *  Example 2: Exceptions should have 'Exceptions' as headline and not 'Errors' or 'Errors thrown'.
- *  
+ *
  *  Example 3: Having an 'Exceptions' section before the 'Return value' section should be avoided.
  *  The correct order of the sections is 'Parameters', 'Return value' and 'Exceptions'.
- * 
+ *
  *  Implementation notes: This test searches for specific keywords like 'returns' or 'errors' and
  *  expects the headlines to be <h3> elements under a <h2>Syntax</h2> section.
  */

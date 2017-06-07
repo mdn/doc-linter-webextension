@@ -1,10 +1,10 @@
 /*
  *  Title: Test for shell prompts, i.e. lines starting with '>' or '$' in code blocks.
  *
- *  Example 1: <pre class="brush: plain">$user: </pre> should rather be replaced by 
+ *  Example 1: <pre class="brush: plain">$user: </pre> should rather be replaced by
  *  <pre class="brush: plain"></pre>.
  *
- *  Implementation notes: This test checks whether lines within <pre> elements start with '$' or 
+ *  Implementation notes: This test checks whether lines within <pre> elements start with '$' or
  *  '>'.
  */
 

@@ -140,16 +140,13 @@ docTests.invalidMacros = {
     let treeWalker = document.createTreeWalker(
         rootElement,
         NodeFilter.SHOW_TEXT,
-        {
-          acceptNode: (node) => {
-            return node.textContent.match(/\{\{.*?\}\}/) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-          }
-        }
+        // eslint-disable-next-line
+      {acceptNode: node => node.textContent.match(/\{\{.*?\}\}/) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT}
     );
     let matches = [];
 
-    while(treeWalker.nextNode()) {
-      let reMacroName = /\{\{\s*([^\(\}\s]+).*?\}\}/g;
+    while (treeWalker.nextNode()) {
+      let reMacroName = /\{\{\s*([^(}\s]+).*?\}\}/g;
       let macroNameMatch = reMacroName.exec(treeWalker.currentNode.textContent);
       while (macroNameMatch) {
         if (obsoleteMacros.includes(macroNameMatch[1].toLowerCase())) {
@@ -174,7 +171,7 @@ docTests.invalidMacros = {
 
   fix: function fixInvalidMacros(matches) {
     let reObsoleteMacros =
-        new RegExp("\\{\\{\\\s*(?:" + obsoleteMacros.join("|") + ").*?\\}\\}", "gi");
+        new RegExp(`\\{\\{\\s*(?:${obsoleteMacros.join("|")}).*?\\}\\}`, "gi");
 
     matches.forEach(match => {
       if (!match.node) {
@@ -186,4 +183,5 @@ docTests.invalidMacros = {
         match.node.parentNode.remove();
       }
     });
-}};
+  }
+};

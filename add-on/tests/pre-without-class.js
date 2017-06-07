@@ -1,10 +1,10 @@
 /*
  *  Title: Test for code blocks without 'class' attribute specifying the syntax highlighting.
  *
- *  Example 1: <pre>var x = 1</pre> should rather be replaced by 
+ *  Example 1: <pre>var x = 1</pre> should rather be replaced by
  *  <pre class="brush: js">var x = 1</pre>.
  *
- *  Implementation notes: This test checks all <pre> elements that have either an empty 'class' 
+ *  Implementation notes: This test checks all <pre> elements that have either an empty 'class'
  *  attribute or none at all.
  */
 
@@ -17,7 +17,7 @@ docTests.preWithoutClass = {
 
     for (let i = 0; i < presWithoutClass.length; i++) {
       // If the content is recognized as folder structure, don't add a warning for empty <pre>
-      if (presWithoutClass[i].textContent.match(/^\S[^\n\*]*\/\n/)) {
+      if (presWithoutClass[i].textContent.match(/^\S[^\n*]*\/\n/)) {
         continue;
       }
 
@@ -27,11 +27,11 @@ docTests.preWithoutClass = {
       if (presWithoutClass[i].textContent.match(/^\s*(?:\/\*.+?\*\/|<.+?>|@[^\s\n]+[^\n]*\{\n|\{\{\s*csssyntax(?:\(\))?\s*\}\})/)) {
         type = ERROR;
       }
-      
+
       matches.push({
         msg: presWithoutClass[i].outerHTML,
-        type: type
-      })
+        type
+      });
     }
 
     return matches;

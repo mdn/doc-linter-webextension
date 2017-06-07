@@ -3,7 +3,7 @@
  *
  *  Example 1: <h2 name="Syntax">Syntax</h2> should rather be <h2 id="Syntax"Syntax</h2>.
  *
- *  Example 2: The name="" attribute in <p name="someunusedname">paragraph</h2> should rather be 
+ *  Example 2: The name="" attribute in <p name="someunusedname">paragraph</h2> should rather be
  *  removed.
  *
  *  Implementation notes: This test checks all elements containing 'name' attributes.
@@ -19,9 +19,9 @@ docTests.nameAttribute = {
     for (let i = 0; i < elementsWithNameAttribute.length; i++) {
       matches.push({
         node: elementsWithNameAttribute[i],
-        msg: 'name="' + elementsWithNameAttribute[i].getAttribute("name") + '"',
+        msg: `name="${elementsWithNameAttribute[i].getAttribute("name")}"`,
         type: ERROR
-      })
+      });
     }
 
     return matches;

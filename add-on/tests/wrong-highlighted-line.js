@@ -13,12 +13,12 @@
  *  <pre class="brush: js; highlight[10-20]">var x = 1;</pre>
  *  are invalid.
  *
- *  Example 4: Highlighted ranges where the start line is bigger than the end line line in 
+ *  Example 4: Highlighted ranges where the start line is bigger than the end line line in
  *  <pre class="brush: js; highlight[2-1]">var x = 1;\nvar y = 2;</pre>
  *  are invalid.
  *
- *  Implementation notes: This test searches for all <pre> elements containing a 'highlight' 
- *  class, then splits the numbers and ranges wrapped by square brackets following the 'highlight' 
+ *  Implementation notes: This test searches for all <pre> elements containing a 'highlight'
+ *  class, then splits the numbers and ranges wrapped by square brackets following the 'highlight'
  *  class and finally checks each item whether its valid.
  */
 
@@ -38,12 +38,10 @@ docTests.wrongHighlightedLine = {
         let numbersAndRanges = match[1].split(",");
         let lineCount = presWithHighlighting[i].innerHTML.split(/<br\s*\/?>|\n/gi).length;
 
-        numbersAndRanges.forEach((numberOrRange) => {
+        numbersAndRanges.forEach(numberOrRange => {
           let start;
           let end;
-          try {
-            [,start,end] = numberOrRange.match(/^\s*(-?\d+)(?:\s*-\s*(-?\d+))?\s*$/);
-          } catch (e) {}
+          [, start, end] = numberOrRange.match(/^\s*(-?\d+)(?:\s*-\s*(-?\d+))?\s*$/);
 
           if (start === undefined) {
             return;

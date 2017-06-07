@@ -2,9 +2,9 @@
  *  Title: Test whether code blocks unexpectedly contain <code> elements, which break the syntax
  *  highlighting.
  *
- *  Example 1: <pre class="brush:js"><code>var x = 1;</code></pre> is considered invalid and 
+ *  Example 1: <pre class="brush:js"><code>var x = 1;</code></pre> is considered invalid and
  *  should rather be written as <pre class="brush:js">var x = 1;</pre>.
- * 
+ *
  *  Implementation notes: This test checks whether <pre> elements contain <code> elements.
  */
 
@@ -28,7 +28,7 @@ docTests.codeInPre = {
   fix: function fixCodeInPre(matches) {
     matches.forEach(match => {
       let children = new DocumentFragment();
-      for(let i = 0; i < match.node.childNodes.length; i++) {
+      for (let i = 0; i < match.node.childNodes.length; i++) {
         children.appendChild(match.node.childNodes[i].cloneNode(true));
       }
       match.node.parentNode.replaceChild(children, match.node);

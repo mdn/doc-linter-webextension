@@ -2,8 +2,8 @@
  *  Title: Test whether discouraged statements are used in example code.
  *
  *  Example 1: <pre>alert("Some message");</pre> should be avoided and
- *  <pre>console.log("Some message");</pre> be used instead. 
- * 
+ *  <pre>console.log("Some message");</pre> be used instead.
+ *
  *  Implementation notes: This test checks all <pre> blocks for the usage of discouraged functions.
  *  In some cases their usage may not be avoided, like for example on their description pages.
  *  The test does not account for those cases, though.
