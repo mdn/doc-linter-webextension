@@ -174,10 +174,12 @@ document.addEventListener("DOMContentLoaded", event => {
  * Process the result from the test.
  */
 function processTestResult(testObj, id) {
-  testObj.name = browser.i18n.getMessage(testObj.name);
-  testObj.desc = browser.i18n.getMessage(testObj.desc);
+  // TODO: Follow https://bugzilla.mozilla.org/show_bug.cgi?id=1370884
+  let test = JSON.parse(testObj);
+  test.name = browser.i18n.getMessage(test.name);
+  test.desc = browser.i18n.getMessage(test.desc);
 
-  testObj.errors.forEach((error, index, errors) => {
+  test.errors.forEach((error, index, errors) => {
     errors[index] = {
       msg: [error.msg].concat(error.msgParams),
       type: error.type
@@ -186,7 +188,7 @@ function processTestResult(testObj, id) {
 
   // document.getElementById("testProgress").value += Math.round(100 / testList.length);
 
-  showTestResult(testObj, id);
+  showTestResult(test, id);
 }
 
 browser.runtime.onConnect.addListener(port => {
