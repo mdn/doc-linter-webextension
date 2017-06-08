@@ -1,7 +1,7 @@
 {
   "applications": {
     "gecko": {
-      "id": "mdndoclinter@mozilla.org",
+      "id": "mdndoclinter@mdn.org",
         "strict_min_version": "54.0a1"
     }
   },
@@ -28,8 +28,7 @@
   "permissions": [
     "*://developer.mozilla.org/*",
     "activeTab",
-    "webNavigation",
-    "tabs"
+    "webNavigation"
   ],
 
   "page_action": {
