@@ -3,7 +3,7 @@ const WARNING = 2;
 const INFO = 3;
 
 // eslint-disable-next-line no-unused-vars
-let port;
+const port = browser.runtime.connect({name: "sidebar"});
 
 /*
  * Global variables
@@ -46,7 +46,7 @@ function runTests() {
   let progressBar = document.getElementById("testProgress");
   progressBar.value = 0;
   progressBar.classList.add("visible");
-  this.port.postMessage({type: "runTests"});
+  port.postMessage({type: "runTests"});
 }
 
 /*
@@ -191,26 +191,22 @@ function processTestResult(testObj, id) {
   showTestResult(test, id);
 }
 
-browser.runtime.onConnect.addListener(port => {
-  this.port = port;
-
-  port.onMessage.addListener(message => {
-    switch (message.type) {
-      case "showTestResult":
-        showTestResult(message.test, message.id);
-        break;
-      case "updateProgress":
-        document.getElementById("testProgress").value += message.progress;
-        break;
-      case "hideProgressBar":
-      case "finishedTests":
-        document.getElementById("testProgress").classList.remove("visible");
-        break;
-      case "processTestResult":
-        processTestResult(message.test, message.id);
-        break;
-    }
-  });
+port.onMessage.addListener(message => {
+  switch (message.type) {
+    case "showTestResult":
+      showTestResult(message.test, message.id);
+      break;
+    case "updateProgress":
+      document.getElementById("testProgress").value += message.progress;
+      break;
+    case "hideProgressBar":
+    case "finishedTests":
+      document.getElementById("testProgress").classList.remove("visible");
+      break;
+    case "processTestResult":
+      processTestResult(message.test, message.id);
+      break;
+  }
 });
 
 window.addEventListener("DOMContentLoaded", function loadTestSuite() {

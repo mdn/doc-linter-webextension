@@ -8,7 +8,7 @@
  */
 const RUN_TESTS_DELAY = 500;
 
-const port = browser.runtime.connect(browser.runtime.id);
+const port = browser.runtime.connect({name: "worker"});
 let runTestsTimeout = null;
 
 /*

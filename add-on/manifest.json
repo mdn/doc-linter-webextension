@@ -6,7 +6,7 @@
     }
   },
   "background": {
-    "scripts": ["browser-polyfill.min.js", "main.js", "/tests/testlist.js"]
+    "scripts": ["browser-polyfill.min.js", "main.js","proxy.js", "/tests/testlist.js"]
   },
   "content_scripts": [{
     "matches": ["*://developer.mozilla.org/*"],
