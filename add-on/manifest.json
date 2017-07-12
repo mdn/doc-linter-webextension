@@ -2,8 +2,7 @@
   "applications": {
     "gecko": {
       "id": "mdndoclinter@mdn.org",
-      "strict_min_version": "54.0a1",
-      "update_url": "https://mdn.github.io/doc-linter-webextension/updates.json"
+      "strict_min_version": "54.0a1"
     }
   },
   "background": {
