@@ -18,7 +18,8 @@ module.exports = {
     "docTests": true,
     "testList": true,
     "mapMatches": true,
-    "isNewParagraphHelper": true
+    "isNewParagraphHelper": true,
+    "linter": true
   },
   "plugins": [
     "json",

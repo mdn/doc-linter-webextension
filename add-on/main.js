@@ -1,15 +1,10 @@
 "use strict";
 
 /*
- * Constants
- */
-const editURL = /^https:\/\/developer\.mozilla\.org\/.+(?:\$(?:edit|translate)|\/docs\/new(?:\?|$))/;
-
-/*
  * Load content scripts
  */
 function loadTests() {
-  return browser.tabs.executeScript({file: '/rules.js'});
+  return browser.tabs.executeScript({file: "/rules.js"});
 }
 
 /*
@@ -18,4 +13,3 @@ function loadTests() {
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   loadTests();
 });
-
