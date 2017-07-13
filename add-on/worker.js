@@ -62,17 +62,11 @@ function fixIssues(testObj, id) {
  */
 port.onMessage.addListener(message => {
   switch (message.type) {
-    case "processTestResult":
-      // TODO:
-      break;
     case "runTests":
       runTests();
       break;
     case "fixIssues":
       docTests.forEach((element, index) => fixIssues(element, index));
-      break;
-    default:
-      // TODO:
       break;
   }
 });
