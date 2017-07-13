@@ -3,3 +3,4 @@ build
 dist
 node_modules
 add-on/*.min.js
+add-on/rules.js

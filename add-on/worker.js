@@ -38,8 +38,7 @@ function runTests() {
   let iframe = document.querySelector("iframe.cke_wysiwyg_frame");
   if (iframe) {
     let rootElement = iframe.contentDocument.body;
-    // docTests is filed by the test dynamically loaded in main.js -> loadTests()
-    Object.keys(docTests).forEach(key => runTest(docTests[key], key, rootElement));
+    Object.entries(linter).forEach((element, index) => runTest(linter[element[0]], element[0], rootElement));
   }
   port.postMessage({type: "finishedTests"});
 }
