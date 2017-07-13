@@ -21,8 +21,6 @@ function runTest(testObj, id, rootElement) {
     let contentTest = testObj.check(rootElement);
     testObj.errors = contentTest;
 
-    /* TODO: Follow progress on bug https://bugzilla.mozilla.org/show_bug.cgi?id=1370884 */
-
     port.postMessage({
       type: "processTestResult",
       test: JSON.stringify(testObj),
