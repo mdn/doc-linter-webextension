@@ -44,9 +44,7 @@ $ npm test
 You can run individual tests, e.g.
 
 ```shell
-$ npm run lint
-$ npm run test:karma
-$ npm run test:func
+$ npm run lint:webext
 ```
 
 More information on the tests in this repository

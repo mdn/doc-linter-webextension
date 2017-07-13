@@ -1,13 +1,3 @@
 language: node_js
-addons:
-  firefox: latest-nightly
 node_js:
 - '6'
-before_install:
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
-- sleep 3
-env:
-  global:
-  - secure: "EIwektOzTBqWLjvRLwMnAwCSExuwxtql+2OLGB+6VU7lOd1sOgIt/UZBru3hdNUTOOhY8TxVdZ3kU611m5We0wS161tNs6AcOw3YlPzHq5SX8cCb3EISVBnDLzKoYf8SGwJMxvnMTnTKmujwEHtmOSHSagN3qUQYo7UQ3GWsP/hnqL9dzbPZuiT/FwuJN1aCrqUxsv+f2a3jBaGHSDSdgT21bu0p6XGzvl4CA8BsN69IJY9OSe/Dn1vy3HTxQkGc8CZEzpH6MpdOLDdL6CwB1JLo8svdX78Zqwv54oUtEvjqgweKgZWYXpQksC310k76aZ4gZsc7+W3bXLKp/Ue8mX8zguGWaoqP8eBw/TYUVi0EY/ubLSPTCFVzT1icj9ZpqBTmO++xU99Di8IAaoJvUP6YN8ppXpsukB+FO+KZJKEhQRM2V6j7BQahz6fXKNK/HooY+EHXoWw24z014chYraaXu88lqepHCg7eiXcIqnazWp0gp2NcEqMNsSf2e0GPIPf1rVjRHOb30dyjU4m/xNI21QQiElYU2TlEqKdJT38fIOErmTDHN6tkNagxngwYzFOOdn+nONESdwXMgw6coZfvLKuj5vnzWZyCKSvkg87bW82CEblJ0Ju2QR+qbzDuVmD3GJKXKOB16Dleyvrol/ofG5+0Vb67CAVphN7OI4s="
-  - FIREFOX_BINARY: firefox
