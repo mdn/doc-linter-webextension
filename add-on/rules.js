@@ -94,12 +94,17 @@ exports.alertPrintInCode = {
 
 const ERROR = require('./doctests.js').ERROR;
 
-const disallowedNames = new Map([["returns", "Return value"], ["errors", "Exceptions"],
-    ["errors thrown", "Exceptions"]]);
+const disallowedNames = new Map([
+  ["arguments", "Parameters"],
+  ["returns", "Return value"],
+  ["errors", "Exceptions"],
+  ["errors thrown", "Exceptions"],
+  ["exceptions thrown", "Exceptions"]
+]);
 const validOrder = [
-  new Set(["parameters"]),
+  new Set(["parameters", "arguments"]),
   new Set(["return value", "returns"]),
-  new Set(["exceptions", "errors", "errors thrown"])
+  new Set(["exceptions", "exceptions thrown", "errors", "errors thrown"])
 ];
 
 exports.apiSyntaxHeadlines = {
@@ -340,9 +345,12 @@ exports.differentLocaleLinks = {
       let href = links[i].getAttribute("href");
       if (href) {
         let [, linkDomain, linkLocale] = href.match(/^(?:https?:\/\/(.+?))?\/([^/]+)/i) ||
-            [null, null, null];
-        if (linkLocale && linkLocale.toLowerCase() !== pageLocale.toLowerCase() &&
-            (!linkDomain || linkDomain === pageDomain)) {
+          [null, null, null];
+        let oldAttachmentLink = !linkLocale.startsWith("@");
+        let compareLocale = linkLocale.toLowerCase() !== pageLocale.toLowerCase();
+        let internalLinks = !linkDomain || linkDomain === pageDomain;
+
+        if(linkLocale && oldAttachmentLink && compareLocale && internalLinks) {
           matches.push({
             msg: "link_using_wrong_locale",
             msgParams: [href, pageLocale],
@@ -460,9 +468,9 @@ exports.emptyElements = {
         NodeFilter.SHOW_ELEMENT,
       {
         acceptNode: node => {
-            // matching self-closing elements and excluding them
+            // matching self-closing elements and td elements and excluding them
           if (!node.localName.match(/^link|track|param|area|command|col|base|meta|hr|source|img|keygen|br|wbr|input$/i) &&
-                node.textContent.match(/^(?:&nbsp;|\s|\n)*$/)) {
+                !node.localName.match(/^td$/i) && node.textContent.match(/^(?:&nbsp;|\s|\n)*$/)) {
               // Exclude new paragraph helper
             if (isNewParagraphHelper(node.firstElementChild)) {
               return NodeFilter.FILTER_REJECT;
@@ -784,23 +792,6 @@ exports.invalidMacros = {
       "chromebug",
       "communitybox",
       "compat",
-      "compatandroid",
-      "compatchrome",
-      "compatchromemobile",
-      "compatedge",
-      "compatgeckodesktop",
-      "compatgeckofxos",
-      "compatgeckomobile",
-      "compatibilitytable",
-      "compatie",
-      "compatnightly",
-      "compatno",
-      "compatopera",
-      "compatoperamobile",
-      "compatsafari",
-      "compatunknown",
-      "compatversionunknown",
-      "compatwebkit",
       "cssdata",
       "cssinfo",
       "cssref",
@@ -1185,18 +1176,14 @@ exports.oldURLs = {
   name: "old_en_urls",
   desc: "old_en_urls_desc",
   check: function checkOldURLs(rootElement) {
-    let links = rootElement.querySelectorAll("a[href]");
+    let links = rootElement.querySelectorAll("a[href^='/en/' i]");
     let matches = [];
 
     for (let i = 0; i < links.length; i++) {
-      // This check can be removed once querySelectorAll supports case-insensitive search,
-      // i.e. a[href^='/en/' i] (see bug 888190, fixed in Firefox 47.0)
-      if (links[i].getAttribute("href").match(/^\/en\//i)) {
-        matches.push({
-          msg: links[i].outerHTML,
-          type: ERROR
-        });
-      }
+      matches.push({
+        msg: links[i].outerHTML,
+        type: ERROR
+      });
     }
 
     return matches;
