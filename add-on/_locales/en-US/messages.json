@@ -354,5 +354,25 @@
   "autoExpandErrors_description": {
     "message": "Immediately display errors and warnings returned by a test when running the test suite.",
     "description": "Description of 'autoExpandErrors' property (shown in Add-ons Manager)"
+  },
+  "link_count": {
+    "message": "Link count",
+    "description": "Name of the rule"
+  },
+  "link_count_desc": {
+    "message": "Number of links in the document",
+    "description": "Number of links"
+  },
+  "count_link_info": {
+    "message": "There are %s links",
+    "description": "Informations when there are less than 100 links"
+  },
+  "count_link_warning": {
+    "message": "There should be less than 100 links, currently: %s",
+    "description": "Warning regarding the number of links"
+  },
+  "count_link_error": {
+    "message": "There should be less than 250 links and ideally less than 100 links, currently: %s",
+    "description": "Error regarding the number of links"
   }
 }
