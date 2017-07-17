@@ -94,12 +94,17 @@ exports.alertPrintInCode = {
 
 const ERROR = require('./doctests.js').ERROR;
 
-const disallowedNames = new Map([["returns", "Return value"], ["errors", "Exceptions"],
-    ["errors thrown", "Exceptions"]]);
+const disallowedNames = new Map([
+  ["arguments", "Parameters"],
+  ["returns", "Return value"],
+  ["errors", "Exceptions"],
+  ["errors thrown", "Exceptions"],
+  ["exceptions thrown", "Exceptions"]
+]);
 const validOrder = [
-  new Set(["parameters"]),
+  new Set(["parameters", "arguments"]),
   new Set(["return value", "returns"]),
-  new Set(["exceptions", "errors", "errors thrown"])
+  new Set(["exceptions", "exceptions thrown", "errors", "errors thrown"])
 ];
 
 exports.apiSyntaxHeadlines = {
@@ -340,9 +345,16 @@ exports.differentLocaleLinks = {
       let href = links[i].getAttribute("href");
       if (href) {
         let [, linkDomain, linkLocale] = href.match(/^(?:https?:\/\/(.+?))?\/([^/]+)/i) ||
-            [null, null, null];
-        if (linkLocale && linkLocale.toLowerCase() !== pageLocale.toLowerCase() &&
-            (!linkDomain || linkDomain === pageDomain)) {
+          [null, null, null];
+        let oldAttachmentLink = false;
+        let compareLocale = false;
+        if(linkLocale !== null) {
+          oldAttachmentLink = !linkLocale.startsWith("@");
+          compareLocale = linkLocale.toLowerCase() !== pageLocale.toLowerCase();
+        }
+        let internalLinks = !linkDomain || linkDomain === pageDomain;
+
+        if(linkLocale !== null && linkLocale && oldAttachmentLink && compareLocale && internalLinks) {
           matches.push({
             msg: "link_using_wrong_locale",
             msgParams: [href, pageLocale],
@@ -460,9 +472,9 @@ exports.emptyElements = {
         NodeFilter.SHOW_ELEMENT,
       {
         acceptNode: node => {
-            // matching self-closing elements and excluding them
+            // matching self-closing elements and td elements and excluding them
           if (!node.localName.match(/^link|track|param|area|command|col|base|meta|hr|source|img|keygen|br|wbr|input$/i) &&
-                node.textContent.match(/^(?:&nbsp;|\s|\n)*$/)) {
+                !node.localName.match(/^td$/i) && node.textContent.match(/^(?:&nbsp;|\s|\n)*$/)) {
               // Exclude new paragraph helper
             if (isNewParagraphHelper(node.firstElementChild)) {
               return NodeFilter.FILTER_REJECT;
@@ -718,40 +730,41 @@ exports.incorrectlyWrappedSidebarMacros = {
 
 },{"./doctests.js":8}],16:[function(require,module,exports){
 const docTests = {
-        absoluteURLsForInternalLinks : require('./absolute-urls-for-internal-links.js').absoluteURLsForInternalLinks,
-        alertPrintInCode : require('./alert-print-in-code.js').alertPrintInCode,
-        apiSyntaxHeadlines : require('./api-syntax-headlines.js').apiSyntaxHeadlines,
-        articleLength : require('./article-length.js').articleLength,
-        codeInPre : require('./code-in-pre.js').codeInPre,
-        dataMacroNote : require('./data-macro-note.js').dataMacroNote,
-        differentLocaleLinks : require('./different-locale-links.js').differentLocaleLinks,
-        emptyBrackets : require('./empty-brackets.js').emptyBrackets,
-        emptyElements : require('./empty-elements.js').emptyElements,
-        exampleColonHeading : require('./example-colon-heading.js').exampleColonHeading,
-        fontElements : require('./font-elements.js').fontElements,
-        htmlComments : require('./html-comments.js').htmlComments,
-        httpLinks : require('./http-links.js').httpLinks,
-        incorrectlyWrappedSidebarMacros : require('./incorrectly-wrapped-sidebar-macros.js').incorrectlyWrappedSidebarMacros,
-        invalidMacros : require('./invalid-macros.js').invalidMacros,
-        lineLengthInPre : require('./line-length-in-pre.js').lineLengthInPre,
-        linkCount : require('./link-count.js').linkCount,
-        macroSyntaxError : require('./macro-syntax-error.js').macroSyntaxError,
-        nameAttribute : require('./name-attribute.js').nameAttribute,
-        oldURLs : require('./old-urls.js').oldURLs,
-  //preWithoutClass : require('./pre-without-class.js').preWithoutClass,
-        shellPrompts : require('./shell-prompts.js').shellPrompts,
-        spanCount : require('./span-count.js').spanCount,
-        styleAttribute : require('./style-attribute.js').styleAttribute,
-        summaryHeading : require('./summary-heading.js').summaryHeading,
-        unnecessaryMacroParams : require('./unnecessary-macro-params.js').unnecessaryMacroParams,
-        urlInLinkTitle : require('./url-in-link-title.js').urlInLinkTitle,
-        wrongHighlightedLine : require('./wrong-highlighted-line.js').wrongHighlightedLine,
-        wrongSyntaxClass : require('./wrong-syntax-class.js').wrongSyntaxClass
+  absoluteURLsForInternalLinks : require('./absolute-urls-for-internal-links.js').absoluteURLsForInternalLinks,
+  alertPrintInCode : require('./alert-print-in-code.js').alertPrintInCode,
+  apiSyntaxHeadlines : require('./api-syntax-headlines.js').apiSyntaxHeadlines,
+  articleLength : require('./article-length.js').articleLength,
+  codeInPre : require('./code-in-pre.js').codeInPre,
+  dataMacroNote : require('./data-macro-note.js').dataMacroNote,
+  differentLocaleLinks : require('./different-locale-links.js').differentLocaleLinks,
+  emptyBrackets : require('./empty-brackets.js').emptyBrackets,
+  emptyElements : require('./empty-elements.js').emptyElements,
+  exampleColonHeading : require('./example-colon-heading.js').exampleColonHeading,
+  fontElements : require('./font-elements.js').fontElements,
+  htmlComments : require('./html-comments.js').htmlComments,
+  httpLinks : require('./http-links.js').httpLinks,
+  incorrectlyWrappedSidebarMacros : require('./incorrectly-wrapped-sidebar-macros.js').incorrectlyWrappedSidebarMacros,
+  invalidMacros : require('./invalid-macros.js').invalidMacros,
+  lineLengthInPre : require('./line-length-in-pre.js').lineLengthInPre,
+  linkCount : require('./link-count.js').linkCount,
+  macroSyntaxError : require('./macro-syntax-error.js').macroSyntaxError,
+  mixedContent : require('./mixed-content.js').mixedContent,
+  nameAttribute : require('./name-attribute.js').nameAttribute,
+  oldURLs : require('./old-urls.js').oldURLs,
+  preWithoutClass : require('./pre-without-class.js').preWithoutClass,
+  shellPrompts : require('./shell-prompts.js').shellPrompts,
+  spanCount : require('./span-count.js').spanCount,
+  styleAttribute : require('./style-attribute.js').styleAttribute,
+  summaryHeading : require('./summary-heading.js').summaryHeading,
+  unnecessaryMacroParams : require('./unnecessary-macro-params.js').unnecessaryMacroParams,
+  urlInLinkTitle : require('./url-in-link-title.js').urlInLinkTitle,
+  wrongHighlightedLine : require('./wrong-highlighted-line.js').wrongHighlightedLine,
+  wrongSyntaxClass : require('./wrong-syntax-class.js').wrongSyntaxClass
 };
 
 module.exports = docTests;
 
-},{"./absolute-urls-for-internal-links.js":1,"./alert-print-in-code.js":2,"./api-syntax-headlines.js":3,"./article-length.js":4,"./code-in-pre.js":5,"./data-macro-note.js":6,"./different-locale-links.js":7,"./empty-brackets.js":9,"./empty-elements.js":10,"./example-colon-heading.js":11,"./font-elements.js":12,"./html-comments.js":13,"./http-links.js":14,"./incorrectly-wrapped-sidebar-macros.js":15,"./invalid-macros.js":17,"./line-length-in-pre.js":18,"./link-count.js":19,"./macro-syntax-error.js":20,"./name-attribute.js":21,"./old-urls.js":22,"./shell-prompts.js":23,"./span-count.js":24,"./style-attribute.js":25,"./summary-heading.js":26,"./unnecessary-macro-params.js":27,"./url-in-link-title.js":28,"./wrong-highlighted-line.js":29,"./wrong-syntax-class.js":30}],17:[function(require,module,exports){
+},{"./absolute-urls-for-internal-links.js":1,"./alert-print-in-code.js":2,"./api-syntax-headlines.js":3,"./article-length.js":4,"./code-in-pre.js":5,"./data-macro-note.js":6,"./different-locale-links.js":7,"./empty-brackets.js":9,"./empty-elements.js":10,"./example-colon-heading.js":11,"./font-elements.js":12,"./html-comments.js":13,"./http-links.js":14,"./incorrectly-wrapped-sidebar-macros.js":15,"./invalid-macros.js":17,"./line-length-in-pre.js":18,"./link-count.js":19,"./macro-syntax-error.js":20,"./mixed-content.js":21,"./name-attribute.js":22,"./old-urls.js":23,"./pre-without-class.js":24,"./shell-prompts.js":25,"./span-count.js":26,"./style-attribute.js":27,"./summary-heading.js":28,"./unnecessary-macro-params.js":29,"./url-in-link-title.js":30,"./wrong-highlighted-line.js":31,"./wrong-syntax-class.js":32}],17:[function(require,module,exports){
 /*
  *  Title: Test for the usage of invalid macros.
  *
@@ -784,23 +797,6 @@ exports.invalidMacros = {
       "chromebug",
       "communitybox",
       "compat",
-      "compatandroid",
-      "compatchrome",
-      "compatchromemobile",
-      "compatedge",
-      "compatgeckodesktop",
-      "compatgeckofxos",
-      "compatgeckomobile",
-      "compatibilitytable",
-      "compatie",
-      "compatnightly",
-      "compatno",
-      "compatopera",
-      "compatoperamobile",
-      "compatsafari",
-      "compatunknown",
-      "compatversionunknown",
-      "compatwebkit",
       "cssdata",
       "cssinfo",
       "cssref",
@@ -1130,6 +1126,35 @@ exports.macroSyntaxError = {
 
 },{"./doctests.js":8}],21:[function(require,module,exports){
 /*
+ * Title : Prevent non https content inclusion
+ *
+ * Implementation notes : We check that every <img href=""> is using https://
+ */
+
+const ERROR = require('./doctests.js').ERROR;
+
+// The string must start by https://
+const HTTPS_URL = /^https:\/\//
+
+exports.mixedContent = {
+  name: "mixed_content_name",
+  desc: "mixed_content_desc",
+  check: function checkMixedContent(rootElement) {
+    let images = rootElement.getElementsByTagName("img");
+    let matches = [];
+
+    for(let index = 0; index < images.length; index++){
+      if(!images[index].getAttribute("src").match(HTTPS_URL)) {
+        matches.push({node: images[index], msg: images[index].outerHTML, type: ERROR});
+      }
+    }
+
+    return matches;
+  }
+};
+
+},{"./doctests.js":8}],22:[function(require,module,exports){
+/*
  *  Title: Test for elements with 'name' attributes.
  *
  *  Example 1: <h2 name="Syntax">Syntax</h2> should rather be <h2 id="Syntax"Syntax</h2>.
@@ -1166,7 +1191,7 @@ exports.nameAttribute = {
   }
 };
 
-},{"./doctests.js":8}],22:[function(require,module,exports){
+},{"./doctests.js":8}],23:[function(require,module,exports){
 /*
  *  Title: Test for old /en/ MDN URLs.
  *
@@ -1185,25 +1210,66 @@ exports.oldURLs = {
   name: "old_en_urls",
   desc: "old_en_urls_desc",
   check: function checkOldURLs(rootElement) {
-    let links = rootElement.querySelectorAll("a[href]");
+    let links = rootElement.querySelectorAll("a[href^='/en/' i]");
     let matches = [];
 
     for (let i = 0; i < links.length; i++) {
-      // This check can be removed once querySelectorAll supports case-insensitive search,
-      // i.e. a[href^='/en/' i] (see bug 888190, fixed in Firefox 47.0)
-      if (links[i].getAttribute("href").match(/^\/en\//i)) {
-        matches.push({
-          msg: links[i].outerHTML,
-          type: ERROR
-        });
-      }
+      matches.push({
+        msg: links[i].outerHTML,
+        type: ERROR
+      });
     }
 
     return matches;
   }
 };
 
-},{"./doctests.js":8}],23:[function(require,module,exports){
+},{"./doctests.js":8}],24:[function(require,module,exports){
+/*
+ *  Title: Test for code blocks without 'class' attribute specifying the syntax highlighting.
+ *
+ *  Example 1: <pre>var x = 1</pre> should rather be replaced by
+ *  <pre class="brush: js">var x = 1</pre>.
+ *
+ *  Implementation notes: This test checks all <pre> elements that have either an empty 'class'
+ *  attribute or none at all.
+ */
+
+const WARNING = require('./doctests.js').WARNING;
+const ERROR = require('./doctests.js').ERROR;
+
+exports.preWithoutClass = {
+  name: "pre_without_class",
+  desc: "pre_without_class_desc",
+  check: function checkPreWithoutClass(rootElement) {
+    //let presWithoutClass = rootElement.querySelectorAll("pre:-moz-any(:not([class]), [class=''])");
+    let presWithoutClass = rootElement.querySelectorAll("pre :not([class]), pre [class='']");
+    let matches = [];
+
+    for (let i = 0; i < presWithoutClass.length; i++) {
+      // If the content is recognized as folder structure, don't add a warning for empty <pre>
+      if (presWithoutClass[i].textContent.match(/^\S[^\n*]*\/\n/)) {
+        continue;
+      }
+
+      let type = WARNING;
+
+      // If the content is recognized as code or {{csssyntax}} macro, mark it as error
+      if (presWithoutClass[i].textContent.match(/^\s*(?:\/\*.+?\*\/|<.+?>|@[^\s\n]+[^\n]*\{\n|\{\{\s*csssyntax(?:\(\))?\s*\}\})/)) {
+        type = ERROR;
+      }
+
+      matches.push({
+        msg: presWithoutClass[i].outerHTML,
+        type
+      });
+    }
+
+    return matches;
+  }
+};
+
+},{"./doctests.js":8}],25:[function(require,module,exports){
 /*
  *  Title: Test for shell prompts, i.e. lines starting with '>' or '$' in code blocks.
  *
@@ -1240,7 +1306,7 @@ exports.shellPrompts = {
   }
 };
 
-},{"./doctests.js":8}],24:[function(require,module,exports){
+},{"./doctests.js":8}],26:[function(require,module,exports){
 /*
  *  Title: Test for incorrectly used <span> elements.
  *
@@ -1291,7 +1357,7 @@ exports.spanCount = {
   }
 };
 
-},{"./doctests.js":8}],25:[function(require,module,exports){
+},{"./doctests.js":8}],27:[function(require,module,exports){
 /*
  *  Title: Test for incorrectly 'style' attributes.
  *
@@ -1331,7 +1397,7 @@ exports.styleAttribute = {
   }
 };
 
-},{"./doctests.js":8}],26:[function(require,module,exports){
+},{"./doctests.js":8}],28:[function(require,module,exports){
 /*
  *  Title: Test for obsolete 'Summary' heading.
  *
@@ -1373,7 +1439,7 @@ exports.summaryHeading = {
   }
 };
 
-},{"./doctests.js":8}],27:[function(require,module,exports){
+},{"./doctests.js":8}],29:[function(require,module,exports){
 /*
  *  Title: Test for obsolete macro parameters.
  *
@@ -1437,7 +1503,7 @@ exports.unnecessaryMacroParams = {
   }
 };
 
-},{"./doctests.js":8}],28:[function(require,module,exports){
+},{"./doctests.js":8}],30:[function(require,module,exports){
 /*
  *  Title: Test for incorrectly used URLs in link titles.
  *
@@ -1486,7 +1552,7 @@ exports.urlInLinkTitle = {
   }
 };
 
-},{"./doctests.js":8}],29:[function(require,module,exports){
+},{"./doctests.js":8}],31:[function(require,module,exports){
 /*
  *  Title: Test for incorrect line highlights in code examples.
  *
@@ -1597,7 +1663,7 @@ exports.wrongHighlightedLine = {
   }
 };
 
-},{"./doctests.js":8}],30:[function(require,module,exports){
+},{"./doctests.js":8}],32:[function(require,module,exports){
 /*
  *  Title: Test for whether the 'syntax' class is properly used on a syntax block.
  *

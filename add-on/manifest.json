@@ -36,5 +36,5 @@
     "default_icon":  "img/page_action_32.png",
     "default_title": "__MSG_pageActionTitle__"
   },
-  "version": "0.0.2"
+  "version": "0.0.1"
 }
