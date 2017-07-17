@@ -1,16 +1,16 @@
 {
   "applications": {
     "gecko": {
-      "id": "mdndoclinter@mdn.org",
+      "id": "mdndoclinter@mozilla.developer.org",
       "strict_min_version": "54.0a1"
     }
   },
   "background": {
-    "scripts": ["browser-polyfill.min.js", "main.js","proxy.js", "/tests/testlist.js"]
+    "scripts": ["browser-polyfill.min.js", "main.js","proxy.js"]
   },
   "content_scripts": [{
     "matches": ["*://developer.mozilla.org/*"],
-    "js": ["browser-polyfill.min.js", "worker.js", "/tests/doctests.js"]
+    "js": ["browser-polyfill.min.js", "worker.js"]
   }],
   "sidebar_action": {
     "default_title" : "__MSG_sidebarTitle__",
