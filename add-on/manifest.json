@@ -1,7 +1,7 @@
 {
   "applications": {
     "gecko": {
-      "id": "mdndoclinter@developer.mozilla.org",
+      "id": "{826e8996-b3c2-11e5-9f22-ba0be0483c18}",
       "strict_min_version": "54.0a1"
     }
   },
