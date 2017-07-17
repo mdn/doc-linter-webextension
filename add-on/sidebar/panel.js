@@ -174,7 +174,6 @@ document.addEventListener("DOMContentLoaded", event => {
  * Process the result from the test.
  */
 function processTestResult(testObj, id) {
-  // TODO: Follow https://bugzilla.mozilla.org/show_bug.cgi?id=1370884
   let test = JSON.parse(testObj);
   test.name = browser.i18n.getMessage(test.name);
   test.desc = browser.i18n.getMessage(test.desc);
@@ -185,8 +184,6 @@ function processTestResult(testObj, id) {
       type: error.type
     };
   });
-
-  // document.getElementById("testProgress").value += Math.round(100 / testList.length);
 
   showTestResult(test, id);
 }

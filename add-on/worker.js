@@ -21,8 +21,6 @@ function runTest(testObj, id, rootElement) {
     let contentTest = testObj.check(rootElement);
     testObj.errors = contentTest;
 
-    /* TODO: Follow progress on bug https://bugzilla.mozilla.org/show_bug.cgi?id=1370884 */
-
     port.postMessage({
       type: "processTestResult",
       test: JSON.stringify(testObj),
@@ -64,17 +62,11 @@ function fixIssues(testObj, id) {
  */
 port.onMessage.addListener(message => {
   switch (message.type) {
-    case "processTestResult":
-      // TODO:
-      break;
     case "runTests":
       runTests();
       break;
     case "fixIssues":
       docTests.forEach((element, index) => fixIssues(element, index));
-      break;
-    default:
-      // TODO:
       break;
   }
 });
