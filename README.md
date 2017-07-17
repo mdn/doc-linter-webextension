@@ -10,9 +10,9 @@ The rules used by the extension to lint the documents are available as part of a
 ## Compatibility
 This WebExtension is compatible with:
   - Firefox 54+
-This WebExtension might be compatible with :
+This WebExtension might be compatible with:
   - Opera 46
-This WebExtension is not compatible at all with :
+This WebExtension is not compatible at all with:
   - Google Chrome (Sidebar API is not implemented)
   - Microsoft Edge (Sidebar API is not implemented)
   - Safari
@@ -20,4 +20,4 @@ This WebExtension is not compatible at all with :
 ## Contributing
 
 We are happy to accept contributions to the WebExtension. If you have any questions, we will be glad to answer them on irc.mozilla.org #mdn.
-See also the [Contribution guidelines](https://github.com/mdn/doc-linter-webextension/blob/master/CONTRIBUTING.md)
+See also the [Contribution guidelines](https://github.com/mdn/doc-linter-webextension/blob/master/CONTRIBUTING.md).
