@@ -21,7 +21,7 @@
     "fx-runner": "1.0.6",
     "npm-run-all": "4.0.2",
     "virtualenv": "0.3.1",
-    "web-ext": "1.10.0"
+    "web-ext": "1.10.1"
   },
   "permissions": {
     "multiprocess": true
