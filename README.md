@@ -9,10 +9,12 @@ The rules used by the extension to lint the documents are available as part of a
 
 ## Compatibility
 This WebExtension is compatible with:
+
   - Firefox 54+
-This WebExtension might be compatible with:
-  - Opera 46
+
 This WebExtension is not compatible at all with:
+
+  - Opera 46
   - Google Chrome (Sidebar API is not implemented)
   - Microsoft Edge (Sidebar API is not implemented)
   - Safari
