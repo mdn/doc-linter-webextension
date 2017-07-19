@@ -26,5 +26,9 @@
   "buttonRunTests": {
     "message": "Lancer les tests",
     "description": "Content of the button to run the test suite"
+  },
+  "switch_panel": {
+    "message": "Preferences",
+    "description": "Button to switch to/from preference panel"
   }
 }

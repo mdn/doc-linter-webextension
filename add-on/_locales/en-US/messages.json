@@ -43,6 +43,10 @@
     "message": "Warnings:",
     "description": "Label for the number of warnings"
   },
+  "switch_panel": {
+    "message": "Preferences",
+    "description": "Button to switch to/from preference panel"
+  },
   "fix_issues": {
     "message": "Fix issues",
     "description": "Label for button allowing to fix the matched errors and warnings"

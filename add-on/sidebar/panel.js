@@ -209,6 +209,29 @@ port.onMessage.addListener(message => {
   }
 });
 
+/*
+ * Switch between tests and preferences panel
+ */
+function switchPanel() {
+  let tests = document.getElementById("testsPanel");
+  let preferences = document.getElementById("preferencesPanel");
+
+  if (preferences.classList.contains("hide")) {
+    preferences.classList.remove("hide");
+    tests.classList.add("hide");
+  } else {
+    tests.classList.remove("hide");
+    preferences.classList.add("hide");
+  }
+}
+
+/*
+ * Bind the event on preferences button when the DOM is loaded
+ */
+window.addEventListener("DOMContentLoaded", function switchPanelHandler() {
+  document.getElementById("switchPanel").addEventListener("click", () => switchPanel());
+});
+
 window.addEventListener("DOMContentLoaded", function loadTestSuite() {
   function getParentByClassName(node, className) {
     let currentNode = node;
