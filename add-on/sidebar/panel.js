@@ -79,10 +79,12 @@ function showTestResult(test, id) {
   let newWarningCount = test.errors.filter(match => match.type === WARNING).length;
   let newErrorCount = test.errors.filter(match => match.type === ERROR).length;
 
-  if(localStorage.getItem("hide_passing_tests") === "true") {
+  if (localStorage.getItem("hide_passing_tests") === "true") {
     tests.classList.toggle("hidePassingTests", true);
   } else {
-    if(tests.classList.contains("hidePassingTests")) tests.classList.remove("hidePassingTests");
+    if (tests.classList.contains("hidePassingTests")) {
+      tests.classList.remove("hidePassingTests");
+    }
   }
 
   let testElem = document.getElementById(id);
@@ -215,7 +217,7 @@ port.onMessage.addListener(message => {
  * Load the preferences from localStorage and pre-fill the panel with the relevant preferences.
  */
 function loadPreferences() {
-  if(localStorage.getItem("hide_passing_tests") == true) {
+  if (localStorage.getItem("hide_passing_tests") === true) {
     document.getElementById("passingTests").checked = true;
   }
 }
@@ -227,7 +229,7 @@ window.addEventListener("DOMContentLoaded", function switchPanelHandler() {
   loadPreferences();
 
   // Preferences storage
-  document.getElementById("passingTests").addEventListener("change", (event) => localStorage.setItem("hide_passing_tests", event.target.checked));
+  document.getElementById("passingTests").addEventListener("change", event => localStorage.setItem("hide_passing_tests", event.target.checked));
 });
 
 window.addEventListener("DOMContentLoaded", function loadTestSuite() {
