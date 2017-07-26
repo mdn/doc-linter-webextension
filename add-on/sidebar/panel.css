@@ -90,7 +90,6 @@ li {
   color: #FFF;
   margin-block-end: 1px;
   cursor: default;
-  display: flex;
 }
 
 .test > div {
