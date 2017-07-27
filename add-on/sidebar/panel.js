@@ -178,9 +178,22 @@ function processTestResult(testObj, id) {
   test.name = browser.i18n.getMessage(test.name);
   test.desc = browser.i18n.getMessage(test.desc);
 
+  /*
+   * Replace every token by the next element of substitutes array
+   */
+  function format(message, token, substitutes) {
+    let formattedMessage = message;
+    substitutes.forEach(el => (formattedMessage = formattedMessage.replace(token, el)));
+    return formattedMessage;
+  }
+
   test.errors.forEach((error, index, errors) => {
+    let message = error.msg;
+    if (error.msgParams !== undefined && browser.i18n.getMessage(error.msg) !== "??") {
+      message = format(browser.i18n.getMessage(error.msg), "%s", error.msgParams);
+    }
     errors[index] = {
-      msg: [error.msg].concat(error.msgParams),
+      msg: message,
       type: error.type
     };
   });

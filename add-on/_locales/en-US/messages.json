@@ -374,5 +374,13 @@
   "count_link_error": {
     "message": "There should be less than 250 links and ideally less than 100 links, currently: %s",
     "description": "Error regarding the number of links"
+  },
+  "mixed_content": {
+    "message": "Mixed Content",
+    "description": "Name of the rule"
+  },
+  "mixed_content_desc": {
+    "message": "There should be no mixed content on MDN",
+    "description": "Description of Mixed Content rule"
   }
 }
