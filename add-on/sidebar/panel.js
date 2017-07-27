@@ -183,7 +183,7 @@ function processTestResult(testObj, id) {
    */
   function format(message, token, substitutes) {
     let formattedMessage = message;
-    substitutes.forEach(el => (formattedMessage= formattedMessage.replace(token, el)));
+    substitutes.forEach(el => (formattedMessage = formattedMessage.replace(token, el)));
     return formattedMessage;
   }
 
