@@ -6,11 +6,11 @@
     }
   },
   "background": {
-    "scripts": ["browser-polyfill.min.js", "main.js","proxy.js"]
+    "scripts": ["main.js","proxy.js"]
   },
   "content_scripts": [{
     "matches": ["*://developer.mozilla.org/*"],
-    "js": ["browser-polyfill.min.js", "worker.js"]
+    "js": ["worker.js"]
   }],
   "sidebar_action": {
     "default_title" : "__MSG_sidebarTitle__",

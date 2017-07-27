@@ -104,18 +104,22 @@ li {
 
 .hasErrors {
   background-color: var(--error-color);
+  order: 1;
 }
 
 .hasWarnings {
   background-color: var(--warning-color);
+  order: 2;
 }
 
 .hasInfo {
   background-color: var(--info-color);
+  order: 3;
 }
 
 .ok {
   background-color: var(--ok-color);
+  order: 4;
 }
 
 .testName {
@@ -178,4 +182,12 @@ li {
 #fixIssues.show,
 .show {
   display: block;
+}
+
+.hide {
+  display: none;
+}
+
+#tests {
+  display: grid;
 }
