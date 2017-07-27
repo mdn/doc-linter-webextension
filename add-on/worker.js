@@ -34,16 +34,9 @@ function runTest(testObj, id, rootElement) {
  */
 function runTests() {
   let iframe = document.querySelector("iframe.cke_wysiwyg_frame");
-  let sourceTextarea = document.querySelector("textarea.cke_source");
 
   if (iframe) {
     let rootElement = iframe.contentDocument.body;
-    Object.entries(linter).forEach((element, index) => runTest(linter[element[0]], element[0], rootElement));
-  }
-
-  if (sourceTextarea) {
-    let rootElement = document.createElement("body");
-    rootElement.innerHTML = sourceTextarea.value;
     Object.entries(linter).forEach((element, index) => runTest(linter[element[0]], element[0], rootElement));
   }
 
@@ -94,12 +87,6 @@ function initializeKeyEventHandler() {
   if (ckeditor) {
     ckeditor.addEventListener("keyup", () => (runTestsTimeout = window.setTimeout(runTests, RUN_TESTS_DELAY)));
     ckeditor.addEventListener("keydown", () => (window.clearTimeout(runTestsTimeout)));
-  }
-
-  let sourceTextarea = document.querySelector("textarea.cke_source");
-  if (sourceTextarea) {
-    sourceTextarea.addEventListener("keyup", () => (runTestsTimeout = window.setTimeout(runTests, RUN_TESTS_DELAY)));
-    sourceTextarea.addEventListener("keydown", () => (window.clearTimeout(runTestsTimeout)));
   }
 }
 
