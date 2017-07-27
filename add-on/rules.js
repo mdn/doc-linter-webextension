@@ -1137,7 +1137,7 @@ const ERROR = require('./doctests.js').ERROR;
 const HTTPS_URL = /^https:\/\//
 
 exports.mixedContent = {
-  name: "mixed_content_name",
+  name: "mixed_content",
   desc: "mixed_content_desc",
   check: function checkMixedContent(rootElement) {
     let images = rootElement.getElementsByTagName("img");
