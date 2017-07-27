@@ -34,10 +34,19 @@ function runTest(testObj, id, rootElement) {
  */
 function runTests() {
   let iframe = document.querySelector("iframe.cke_wysiwyg_frame");
+  let sourceTextarea = document.querySelector("textarea.cke_source");
+
   if (iframe) {
     let rootElement = iframe.contentDocument.body;
     Object.entries(linter).forEach((element, index) => runTest(linter[element[0]], element[0], rootElement));
   }
+
+  if (sourceTextarea) {
+    let rootElement = document.createElement("body");
+    rootElement.innerHTML = sourceTextarea.value;
+    Object.entries(linter).forEach((element, index) => runTest(linter[element[0]], element[0], rootElement));
+  }
+
   port.postMessage({type: "finishedTests"});
 }
 
@@ -76,12 +85,22 @@ port.onMessage.addListener(message => {
  */
 function initializeKeyEventHandler() {
   let iframe = document.querySelector("iframe.cke_wysiwyg_frame");
-  iframe.contentWindow.addEventListener("keyup", () => (runTestsTimeout = window.setTimeout(runTests, RUN_TESTS_DELAY)));
-  iframe.contentWindow.addEventListener("keydown", () => (window.clearTimeout(runTestsTimeout)));
+  if (iframe) {
+    iframe.contentWindow.addEventListener("keyup", () => (runTestsTimeout = window.setTimeout(runTests, RUN_TESTS_DELAY)));
+    iframe.contentWindow.addEventListener("keydown", () => (window.clearTimeout(runTestsTimeout)));
+  }
 
   let ckeditor = document.getElementById("id_content");
-  ckeditor.addEventListener("keyup", () => (runTestsTimeout = window.setTimeout(runTests, RUN_TESTS_DELAY)));
-  ckeditor.addEventListener("keydown", () => (window.clearTimeout(runTestsTimeout)));
+  if (ckeditor) {
+    ckeditor.addEventListener("keyup", () => (runTestsTimeout = window.setTimeout(runTests, RUN_TESTS_DELAY)));
+    ckeditor.addEventListener("keydown", () => (window.clearTimeout(runTestsTimeout)));
+  }
+
+  let sourceTextarea = document.querySelector("textarea.cke_source");
+  if (sourceTextarea) {
+    sourceTextarea.addEventListener("keyup", () => (runTestsTimeout = window.setTimeout(runTests, RUN_TESTS_DELAY)));
+    sourceTextarea.addEventListener("keydown", () => (window.clearTimeout(runTestsTimeout)));
+  }
 }
 
 /*
@@ -104,3 +123,15 @@ window.addEventListener("load", function injectIFrame() {
 });
 
 window.setTimeout(initializeKeyEventHandler, 1000);
+
+/*
+ * Bind the "Source mode" button to put the eventListener as they are removed when switching in source mode.
+ */
+function sourceModeSwitchEventHandler() {
+  let sourceSwitch = document.querySelector("#cke_14");
+  sourceSwitch.addEventListener("click", () => {
+    window.setTimeout(initializeKeyEventHandler, 1000);
+  });
+}
+
+window.setTimeout(sourceModeSwitchEventHandler, 1000);
