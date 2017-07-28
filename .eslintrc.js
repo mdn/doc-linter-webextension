@@ -19,7 +19,8 @@ module.exports = {
     "testList": true,
     "mapMatches": true,
     "isNewParagraphHelper": true,
-    "linter": true
+    "linter": true,
+    "DOMPurify": true,
   },
   "plugins": [
     "json",
