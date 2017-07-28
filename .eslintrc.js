@@ -20,7 +20,7 @@ module.exports = {
     "mapMatches": true,
     "isNewParagraphHelper": true,
     "linter": true,
-    "DOMPurify": true,
+    "DOMPurify": true
   },
   "plugins": [
     "json",
