@@ -10,7 +10,7 @@
   },
   "content_scripts": [{
     "matches": ["*://developer.mozilla.org/*"],
-    "js": ["worker.js"]
+    "js": ["purify.min.js", "worker.js"]
   }],
   "sidebar_action": {
     "default_title" : "__MSG_sidebarTitle__",

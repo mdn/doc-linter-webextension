@@ -43,7 +43,7 @@ function runTests() {
 
   if (sourceTextarea) {
     let rootElement = document.createElement("body");
-    rootElement.innerHTML = sourceTextarea.value;
+    rootElement.innerHTML = DOMPurify.sanitize(sourceTextarea.value);
     Object.entries(linter).forEach((element, index) => runTest(linter[element[0]], element[0], rootElement));
   }
 
