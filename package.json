@@ -1,13 +1,9 @@
 {
-  "name": "examplewebextension",
-  "version": "0.0.1",
-  "description": "Example WebExtension Repo",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:standard8/example-webextension-repo.git"
-  },
+  "name": "mdn-doc-linter-webextension",
+  "version": "1.0.1",
+  "description": "A WebExtension to lint MDN documents.",
   "bugs": {
-    "url": "https://github.com/standard8/example-webextension-repo/issues"
+    "url": "https://github.com/mdn/doc-linter-webextension"
   },
   "engines": {
     "firefox": ">=48.0a1"
@@ -26,15 +22,6 @@
   "permissions": {
     "multiprocess": true
   },
-  "preferences": [
-    {
-      "name": "buttonUrl",
-      "title": "Web page url",
-      "description": "The web page url to open when button is clicked",
-      "type": "string",
-      "value": "https://www.mozilla.org/"
-    }
-  ],
   "scripts": {
     "bundle": "web-ext -s add-on -a dist build",
     "download": "node scripts/get_ff.js",
@@ -48,6 +35,6 @@
   },
   "license": "MPL-2.0",
   "keywords": [
-    "webextensions"
+    "webextensions", "mdn"
   ]
 }
