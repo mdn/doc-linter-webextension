@@ -382,5 +382,13 @@
   "mixed_content_desc": {
     "message": "There should be no mixed content on MDN",
     "description": "Description of Mixed Content rule"
+  },
+  "anchor_exists": {
+    "message": "Anchor exists",
+    "description": "Name of Anchor Exists rule"
+  },
+  "anchor_exists_desc": {
+    "message": "Each internal link need to be matched by a proper anchor",
+    "description" : "Description of Anchor Exists rule"
   }
 }
