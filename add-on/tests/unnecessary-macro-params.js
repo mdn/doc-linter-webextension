@@ -20,19 +20,19 @@ docTests.unnecessaryMacroParams = {
   desc: "unnecessary_macro_params_desc",
   check: function checkUnnecessaryMacroParams(rootElement) {
     let treeWalker = document.createTreeWalker(
-        rootElement,
-        NodeFilter.SHOW_TEXT,
+      rootElement,
+      NodeFilter.SHOW_TEXT,
       {
         // eslint-disable-next-line
         acceptNode: node => node.textContent.match(reMacrosNotRequiringParams) ?
-                NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
+          NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
       }
     );
     let matches = [];
 
     while (treeWalker.nextNode()) {
       let textNodeMatches = treeWalker.currentNode.textContent.match(
-          reMacrosNotRequiringParamsGlobal) || [];
+        reMacrosNotRequiringParamsGlobal) || [];
       textNodeMatches.forEach(match => {
         let paramMatch = match.match(/(?:csssyntax|cssinfo|svginfo)\((["'])(.+?)\1/i);
         if (paramMatch) {

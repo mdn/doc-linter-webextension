@@ -15,9 +15,9 @@ docTests.incorrectlyWrappedSidebarMacros = {
     const allowedMacros = /^(?:apiref|cssref|htmlref|jsref|makesimplequicklinks|mathmlref|svgrefelem)$|sidebar$/i;
 
     let treeWalker = document.createTreeWalker(
-        rootElement,
-        NodeFilter.SHOW_TEXT,
-        // eslint-disable-next-line
+      rootElement,
+      NodeFilter.SHOW_TEXT,
+      // eslint-disable-next-line
       {acceptNode: node => node.textContent.match(/\{\{.*?\}\}/) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT}
     );
     let matches = [];

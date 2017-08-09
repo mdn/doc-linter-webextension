@@ -17,14 +17,14 @@ docTests.htmlComments = {
   desc: "html_comments_desc",
   check: function checkHTMLComments(rootElement) {
     let treeWalker = document.createTreeWalker(
-        rootElement,
-        NodeFilter.SHOW_COMMENT
+      rootElement,
+      NodeFilter.SHOW_COMMENT
     );
     let matches = [];
 
     while (treeWalker.nextNode()) {
       let comment = treeWalker.currentNode.data.replace(/\s*\{cke_protected\}\{C\}(\S+)\s*/,
-          (match, data) => decodeURIComponent(data));
+        (match, data) => decodeURIComponent(data));
       matches.push({
         node: treeWalker.currentNode,
         msg: comment,

@@ -16,9 +16,9 @@ docTests.emptyBrackets = {
 
   check: function checkEmptyBrackets(rootElement) {
     let treeWalker = document.createTreeWalker(
-        rootElement,
-        NodeFilter.SHOW_TEXT,
-        // eslint-disable-next-line
+      rootElement,
+      NodeFilter.SHOW_TEXT,
+      // eslint-disable-next-line
       {acceptNode: node => reMacroWithEmptyBrackets.test(node.textContent) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT}
     );
     let matches = [];
@@ -42,7 +42,7 @@ docTests.emptyBrackets = {
     matches.forEach(match => {
       if (match.node !== previousNode) {
         match.node.textContent = match.node.textContent
-            .replace(reMacroWithEmptyBrackets, "{{$1}}");
+          .replace(reMacroWithEmptyBrackets, "{{$1}}");
       }
       previousNode = match.node;
     });

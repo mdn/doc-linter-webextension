@@ -13,21 +13,21 @@ docTests.emptyElements = {
   desc: "empty_elements_desc",
   check: function checkEmptyElements(rootElement) {
     let treeWalker = document.createTreeWalker(
-        rootElement,
-        NodeFilter.SHOW_ELEMENT,
+      rootElement,
+      NodeFilter.SHOW_ELEMENT,
       {
         acceptNode: node => {
-            // matching self-closing elements and excluding them
+          // matching self-closing elements and excluding them
           if (!node.localName.match(/^link|track|param|area|command|col|base|meta|hr|source|img|keygen|br|wbr|input$/i) &&
                 node.textContent.match(/^(?:&nbsp;|\s|\n)*$/)) {
-              // Exclude new paragraph helper
+            // Exclude new paragraph helper
             if (isNewParagraphHelper(node.firstElementChild)) {
               return NodeFilter.FILTER_REJECT;
             }
 
-              // Elements containing self-closing elements except <br> and <wbr> are considered non-empty
+            // Elements containing self-closing elements except <br> and <wbr> are considered non-empty
             let descendantSelfClosingElements = node.querySelectorAll(
-                  "link,track,param,area,command,col,base,meta,hr,source,img,keygen,input");
+              "link,track,param,area,command,col,base,meta,hr,source,img,keygen,input");
             return descendantSelfClosingElements.length === 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
           }
           return NodeFilter.FILTER_SKIP;

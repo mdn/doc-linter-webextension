@@ -18,12 +18,12 @@ docTests.dataMacroNote = {
   desc: "data_macro_note_desc",
   check: function checkDataMacroNote(rootElement) {
     let treeWalker = document.createTreeWalker(
-        rootElement,
-        NodeFilter.SHOW_TEXT,
+      rootElement,
+      NodeFilter.SHOW_TEXT,
       {
         // eslint-disable-next-line
         acceptNode: node => node.textContent.match(/\{\{.*?\}\}/) ?
-                NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
+          NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
       }
     );
     let matches = [];

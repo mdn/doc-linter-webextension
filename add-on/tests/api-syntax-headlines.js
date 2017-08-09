@@ -14,7 +14,7 @@
  */
 
 const disallowedNames = new Map([["returns", "Return value"], ["errors", "Exceptions"],
-    ["errors thrown", "Exceptions"]]);
+  ["errors thrown", "Exceptions"]]);
 const validOrder = [
   new Set(["parameters"]),
   new Set(["return value", "returns"]),
