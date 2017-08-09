@@ -116,7 +116,7 @@
     "description": "Name of test checking for <pre> elements without 'class' attribute"
   },
   "pre_without_class_desc": {
-    "message": "<pre> elements must have a 'class' attribute assigned in most cases, so their syntax is highlighted.",
+    "message": "<pre> elements must have a 'class' attribute assigned in most cases, so their syntax is highlighted. The class 'eval' shouldn't be used.",
     "description": "Description of test checking for <pre> elements without 'class' attribute"
   },
   "summary_heading": {
