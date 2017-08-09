@@ -384,11 +384,11 @@
     "description": "Description of Mixed Content rule"
   },
   "anchor_exists": {
-    "message": "Anchor exists",
+    "message": "Anchor doesn't exist",
     "description": "Name of Anchor Exists rule"
   },
   "anchor_exists_desc": {
-    "message": "Each internal link need to be matched by a proper anchor",
+    "message": "Each fragment identifier (#foo) needs refer to an ID within the page that exists.",
     "description" : "Description of Anchor Exists rule"
   }
 }
