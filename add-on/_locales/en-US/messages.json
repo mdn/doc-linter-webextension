@@ -116,7 +116,7 @@
     "description": "Name of test checking for <pre> elements without 'class' attribute"
   },
   "pre_without_class_desc": {
-    "message": "<pre> elements must have a 'class' attribute assigned in most cases, so their syntax is highlighted.",
+    "message": "<pre> elements must have a 'class' attribute assigned in most cases, so their syntax is highlighted. The class 'eval' shouldn't be used.",
     "description": "Description of test checking for <pre> elements without 'class' attribute"
   },
   "summary_heading": {
@@ -382,5 +382,13 @@
   "mixed_content_desc": {
     "message": "There should be no mixed content on MDN",
     "description": "Description of Mixed Content rule"
+  },
+  "anchor_exists": {
+    "message": "Anchor doesn't exist",
+    "description": "Name of Anchor Exists rule"
+  },
+  "anchor_exists_desc": {
+    "message": "Each fragment identifier (#foo) needs refer to an ID within the page that exists.",
+    "description" : "Description of Anchor Exists rule"
   }
 }
