@@ -1,7 +1,7 @@
 {
-  "name": "doc-linter-webextensioin",
+  "name": "mdn-doc-linter-webextension",
   "version": "1.0.1",
-  "description": "This is an MDN Webextension to lint MDN Documents",
+  "description": "A WebExtension to lint MDN documents.",
   "bugs": {
     "url": "https://github.com/mdn/doc-linter-webextension"
   },
