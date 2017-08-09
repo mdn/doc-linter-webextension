@@ -18,5 +18,5 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
  * Event trigerred at each change of tabs
  */
 browser.tabs.onActivated.addListener(activeInfo => {
-  return browser.tabs.executeScript({file: "/rerun-tests.js"});
+  (browser.tabs.executeScript({file: "/rerun-tests.js"}));
 });
