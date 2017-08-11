@@ -21,8 +21,6 @@ function runTest(testObj, id, rootElement) {
     let contentTest = testObj.check(rootElement);
     testObj.errors = contentTest;
 
-    /* TODO: Follow progress on bug https://bugzilla.mozilla.org/show_bug.cgi?id=1370884 */
-
     port.postMessage({
       type: "processTestResult",
       test: JSON.stringify(testObj),
@@ -36,11 +34,19 @@ function runTest(testObj, id, rootElement) {
  */
 function runTests() {
   let iframe = document.querySelector("iframe.cke_wysiwyg_frame");
+  let sourceTextarea = document.querySelector("textarea.cke_source");
+
   if (iframe) {
     let rootElement = iframe.contentDocument.body;
-    // docTests is filed by the test dynamically loaded in main.js -> loadTests()
-    Object.keys(docTests).forEach(key => runTest(docTests[key], key, rootElement));
+    Object.entries(linter).forEach((element, index) => runTest(linter[element[0]], element[0], rootElement));
   }
+
+  if (sourceTextarea) {
+    let rootElement = document.createElement("body");
+    rootElement.innerHTML = DOMPurify.sanitize(sourceTextarea.value);
+    Object.entries(linter).forEach((element, index) => runTest(linter[element[0]], element[0], rootElement));
+  }
+
   port.postMessage({type: "finishedTests"});
 }
 
@@ -65,17 +71,11 @@ function fixIssues(testObj, id) {
  */
 port.onMessage.addListener(message => {
   switch (message.type) {
-    case "processTestResult":
-      // TODO:
-      break;
     case "runTests":
       runTests();
       break;
     case "fixIssues":
       docTests.forEach((element, index) => fixIssues(element, index));
-      break;
-    default:
-      // TODO:
       break;
   }
 });
@@ -85,12 +85,22 @@ port.onMessage.addListener(message => {
  */
 function initializeKeyEventHandler() {
   let iframe = document.querySelector("iframe.cke_wysiwyg_frame");
-  iframe.contentWindow.addEventListener("keyup", () => (runTestsTimeout = window.setTimeout(runTests, RUN_TESTS_DELAY)));
-  iframe.contentWindow.addEventListener("keydown", () => (window.clearTimeout(runTestsTimeout)));
+  if (iframe) {
+    iframe.contentWindow.addEventListener("keyup", () => (runTestsTimeout = window.setTimeout(runTests, RUN_TESTS_DELAY)));
+    iframe.contentWindow.addEventListener("keydown", () => (window.clearTimeout(runTestsTimeout)));
+  }
 
   let ckeditor = document.getElementById("id_content");
-  ckeditor.addEventListener("keyup", () => (runTestsTimeout = window.setTimeout(runTests, RUN_TESTS_DELAY)));
-  ckeditor.addEventListener("keydown", () => (window.clearTimeout(runTestsTimeout)));
+  if (ckeditor) {
+    ckeditor.addEventListener("keyup", () => (runTestsTimeout = window.setTimeout(runTests, RUN_TESTS_DELAY)));
+    ckeditor.addEventListener("keydown", () => (window.clearTimeout(runTestsTimeout)));
+  }
+
+  let sourceTextarea = document.querySelector("textarea.cke_source");
+  if (sourceTextarea) {
+    sourceTextarea.addEventListener("keyup", () => (runTestsTimeout = window.setTimeout(runTests, RUN_TESTS_DELAY)));
+    sourceTextarea.addEventListener("keydown", () => (window.clearTimeout(runTestsTimeout)));
+  }
 }
 
 /*
@@ -113,3 +123,15 @@ window.addEventListener("load", function injectIFrame() {
 });
 
 window.setTimeout(initializeKeyEventHandler, 1000);
+
+/*
+ * Bind the "Source mode" button to put the eventListener as they are removed when switching in source mode.
+ */
+function sourceModeSwitchEventHandler() {
+  let sourceSwitch = document.querySelector("#cke_14");
+  sourceSwitch.addEventListener("click", () => {
+    window.setTimeout(initializeKeyEventHandler, 1000);
+  });
+}
+
+window.setTimeout(sourceModeSwitchEventHandler, 1000);

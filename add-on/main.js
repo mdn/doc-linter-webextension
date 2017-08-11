@@ -1,32 +1,22 @@
 "use strict";
 
 /*
- * Constants
- */
-const editURL = /^https:\/\/developer\.mozilla\.org\/.+(?:\$(?:edit|translate)|\/docs\/new(?:\?|$))/;
-
-/*
  * Load content scripts
  */
 function loadTests() {
-  return Promise.all([
-    ...testList.map(test => browser.tabs.executeScript({file: `/tests/${test}`}))
-  ]);
+  return browser.tabs.executeScript({file: "/rules.js"});
 }
 
 /*
- * Event used to add the pageAction on MDN pages
+ * Event triggered each time the page is updated
  */
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   loadTests();
-  if (editURL.test(tab.url)) {
-    browser.pageAction.show(tab.id);
-  }
 });
 
 /*
- * Event used when the pageAction button is clicked
+ * Event trigerred at each change of tabs
  */
-browser.pageAction.onClicked.addListener(tab => {
-  // TODO
+browser.tabs.onActivated.addListener(activeInfo => {
+  (browser.tabs.executeScript({file: "/rerun-tests.js"}));
 });
