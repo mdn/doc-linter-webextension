@@ -46,7 +46,7 @@ exports.absoluteURLsForInternalLinks = {
   }
 };
 
-},{"./doctests.js":8}],2:[function(require,module,exports){
+},{"./doctests.js":9}],2:[function(require,module,exports){
 /*
  *  Title: Test whether discouraged statements are used in example code.
  *
@@ -76,7 +76,33 @@ exports.alertPrintInCode = {
   }
 };
 
-},{"./doctests.js":8}],3:[function(require,module,exports){
+},{"./doctests.js":9}],3:[function(require,module,exports){
+/*
+ * Title : Test that each internal links match with an anchor
+ */
+
+const ERROR = require('./doctests.js').ERROR;
+
+const REGEX_ID = /#(.*)/
+
+exports.anchorExists = {
+  name: 'anchor_exists',
+  desc: 'anchor_exists_desc',
+  check: function checkAnchorExists(rootElement) {
+    let matches = [];
+    let anchors = rootElement.querySelectorAll('a[href^="#"]');
+    for(let anchor of anchors) {
+      let id = REGEX_ID.exec(anchor.href)[0];
+      let link = rootElement.querySelector(`${id}`);
+
+      if(link === null) matches.push({msg: id, type: ERROR});
+    }
+
+    return matches;
+  }
+};
+
+},{"./doctests.js":9}],4:[function(require,module,exports){
 /*
  *  Title: Test whether the API syntax headlines are named correctly, i.e. 'Parameters',
  *  'Return value' and 'Exceptions', and whether they appear in the correct order.
@@ -174,7 +200,7 @@ exports.apiSyntaxHeadlines = {
   }
 };
 
-},{"./doctests.js":8}],4:[function(require,module,exports){
+},{"./doctests.js":9}],5:[function(require,module,exports){
 /*
  *  Title: Test the length and read time of the article.
  *
@@ -218,7 +244,7 @@ exports.articleLength = {
   }
 };
 
-},{"./doctests.js":8}],5:[function(require,module,exports){
+},{"./doctests.js":9}],6:[function(require,module,exports){
 /*
  *  Title: Test whether code blocks unexpectedly contain <code> elements, which break the syntax
  *  highlighting.
@@ -259,7 +285,7 @@ exports.codeInPre = {
   }
 };
 
-},{"./doctests.js":8}],6:[function(require,module,exports){
+},{"./doctests.js":9}],7:[function(require,module,exports){
 /*
  *  Title: Test that data macros have a note above them pointing to their data sources.
  *
@@ -320,7 +346,7 @@ exports.dataMacroNote = {
   }
 };
 
-},{"./doctests.js":8}],7:[function(require,module,exports){
+},{"./doctests.js":9}],8:[function(require,module,exports){
 /*
  *  Title: Test for wrong locales in links (<a href>).
  *
@@ -368,7 +394,7 @@ exports.differentLocaleLinks = {
   }
 };
 
-},{"./doctests.js":8}],8:[function(require,module,exports){
+},{"./doctests.js":9}],9:[function(require,module,exports){
 /* eslint-disable */
 // Utilities for all tests
 
@@ -393,7 +419,7 @@ exports.isNewParagraphHelper = function isNewParagraphHelper(element) {
   return style && /z-index:\s*9999;/.test(style);
 }
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*
  *  Title: Test for macros with empty brackets.
  *
@@ -447,7 +473,7 @@ exports.emptyBrackets = {
   }
 };
 
-},{"./doctests.js":8}],10:[function(require,module,exports){
+},{"./doctests.js":9}],11:[function(require,module,exports){
 /*
  *  Title: Test for empty elements.
  *
@@ -511,7 +537,7 @@ exports.emptyElements = {
   }
 };
 
-},{"./doctests.js":8}],11:[function(require,module,exports){
+},{"./doctests.js":9}],12:[function(require,module,exports){
 /*
  *  Title: Test for example headings starting with 'Example:'.
  *
@@ -556,7 +582,7 @@ exports.exampleColonHeading = {
   }
 };
 
-},{"./doctests.js":8}],12:[function(require,module,exports){
+},{"./doctests.js":9}],13:[function(require,module,exports){
 /*
  *  Title: Test for deprecated <font> elements that should be removed or replaced by other
  *  elements.
@@ -591,7 +617,7 @@ exports.fontElements = {
   }
 };
 
-},{"./doctests.js":8}],13:[function(require,module,exports){
+},{"./doctests.js":9}],14:[function(require,module,exports){
 /*
  *  Title: Test for HTML comments (i.e. <!-- -->).
  *
@@ -637,7 +663,7 @@ exports.htmlComments = {
   }
 };
 
-},{"./doctests.js":8}],14:[function(require,module,exports){
+},{"./doctests.js":9}],15:[function(require,module,exports){
 /*
  *  Title: Test for http link usages where https should be used.
  *
@@ -668,7 +694,7 @@ exports.httpLinks = {
   }
 };
 
-},{"./doctests.js":8}],15:[function(require,module,exports){
+},{"./doctests.js":9}],16:[function(require,module,exports){
 /*
  *  Title: Test for sidebar macros that are not wrapped in <div> elements
  *
@@ -728,10 +754,11 @@ exports.incorrectlyWrappedSidebarMacros = {
   }
 };
 
-},{"./doctests.js":8}],16:[function(require,module,exports){
+},{"./doctests.js":9}],17:[function(require,module,exports){
 const docTests = {
   absoluteURLsForInternalLinks : require('./absolute-urls-for-internal-links.js').absoluteURLsForInternalLinks,
   alertPrintInCode : require('./alert-print-in-code.js').alertPrintInCode,
+  anchorExists : require('./anchor-exists.js').anchorExists,
   apiSyntaxHeadlines : require('./api-syntax-headlines.js').apiSyntaxHeadlines,
   articleLength : require('./article-length.js').articleLength,
   codeInPre : require('./code-in-pre.js').codeInPre,
@@ -764,7 +791,7 @@ const docTests = {
 
 module.exports = docTests;
 
-},{"./absolute-urls-for-internal-links.js":1,"./alert-print-in-code.js":2,"./api-syntax-headlines.js":3,"./article-length.js":4,"./code-in-pre.js":5,"./data-macro-note.js":6,"./different-locale-links.js":7,"./empty-brackets.js":9,"./empty-elements.js":10,"./example-colon-heading.js":11,"./font-elements.js":12,"./html-comments.js":13,"./http-links.js":14,"./incorrectly-wrapped-sidebar-macros.js":15,"./invalid-macros.js":17,"./line-length-in-pre.js":18,"./link-count.js":19,"./macro-syntax-error.js":20,"./mixed-content.js":21,"./name-attribute.js":22,"./old-urls.js":23,"./pre-without-class.js":24,"./shell-prompts.js":25,"./span-count.js":26,"./style-attribute.js":27,"./summary-heading.js":28,"./unnecessary-macro-params.js":29,"./url-in-link-title.js":30,"./wrong-highlighted-line.js":31,"./wrong-syntax-class.js":32}],17:[function(require,module,exports){
+},{"./absolute-urls-for-internal-links.js":1,"./alert-print-in-code.js":2,"./anchor-exists.js":3,"./api-syntax-headlines.js":4,"./article-length.js":5,"./code-in-pre.js":6,"./data-macro-note.js":7,"./different-locale-links.js":8,"./empty-brackets.js":10,"./empty-elements.js":11,"./example-colon-heading.js":12,"./font-elements.js":13,"./html-comments.js":14,"./http-links.js":15,"./incorrectly-wrapped-sidebar-macros.js":16,"./invalid-macros.js":18,"./line-length-in-pre.js":19,"./link-count.js":20,"./macro-syntax-error.js":21,"./mixed-content.js":22,"./name-attribute.js":23,"./old-urls.js":24,"./pre-without-class.js":25,"./shell-prompts.js":26,"./span-count.js":27,"./style-attribute.js":28,"./summary-heading.js":29,"./unnecessary-macro-params.js":30,"./url-in-link-title.js":31,"./wrong-highlighted-line.js":32,"./wrong-syntax-class.js":33}],18:[function(require,module,exports){
 /*
  *  Title: Test for the usage of invalid macros.
  *
@@ -939,7 +966,7 @@ exports.invalidMacros = {
   }
 };
 
-},{"./doctests.js":8}],18:[function(require,module,exports){
+},{"./doctests.js":9}],19:[function(require,module,exports){
 /*
  *  Title: Test for the line length in code blocks.
  *
@@ -982,7 +1009,7 @@ exports.lineLengthInPre = {
   }
 };
 
-},{"./doctests.js":8}],19:[function(require,module,exports){
+},{"./doctests.js":9}],20:[function(require,module,exports){
 /*
  * Title : Test whether there are too many links in a page
  * This is done for SEO reasons, based on the assumption that in the case of a lot of links not all of them would be followed and indexed.
@@ -1030,7 +1057,7 @@ exports.linkCount = {
   }
 };
 
-},{"./doctests.js":8}],20:[function(require,module,exports){
+},{"./doctests.js":9}],21:[function(require,module,exports){
 /*
  *  Title: Test for syntax errors in macro calls.
  *
@@ -1124,7 +1151,7 @@ exports.macroSyntaxError = {
   }
 };
 
-},{"./doctests.js":8}],21:[function(require,module,exports){
+},{"./doctests.js":9}],22:[function(require,module,exports){
 /*
  * Title : Prevent non https content inclusion
  *
@@ -1153,7 +1180,7 @@ exports.mixedContent = {
   }
 };
 
-},{"./doctests.js":8}],22:[function(require,module,exports){
+},{"./doctests.js":9}],23:[function(require,module,exports){
 /*
  *  Title: Test for elements with 'name' attributes.
  *
@@ -1191,7 +1218,7 @@ exports.nameAttribute = {
   }
 };
 
-},{"./doctests.js":8}],23:[function(require,module,exports){
+},{"./doctests.js":9}],24:[function(require,module,exports){
 /*
  *  Title: Test for old /en/ MDN URLs.
  *
@@ -1224,7 +1251,7 @@ exports.oldURLs = {
   }
 };
 
-},{"./doctests.js":8}],24:[function(require,module,exports){
+},{"./doctests.js":9}],25:[function(require,module,exports){
 /*
  *  Title: Test for code blocks without 'class' attribute specifying the syntax highlighting.
  *
@@ -1276,7 +1303,7 @@ exports.preWithoutClass = {
   }
 };
 
-},{"./doctests.js":8}],25:[function(require,module,exports){
+},{"./doctests.js":9}],26:[function(require,module,exports){
 /*
  *  Title: Test for shell prompts, i.e. lines starting with '>' or '$' in code blocks.
  *
@@ -1313,7 +1340,7 @@ exports.shellPrompts = {
   }
 };
 
-},{"./doctests.js":8}],26:[function(require,module,exports){
+},{"./doctests.js":9}],27:[function(require,module,exports){
 /*
  *  Title: Test for incorrectly used <span> elements.
  *
@@ -1364,7 +1391,7 @@ exports.spanCount = {
   }
 };
 
-},{"./doctests.js":8}],27:[function(require,module,exports){
+},{"./doctests.js":9}],28:[function(require,module,exports){
 /*
  *  Title: Test for incorrectly 'style' attributes.
  *
@@ -1404,7 +1431,7 @@ exports.styleAttribute = {
   }
 };
 
-},{"./doctests.js":8}],28:[function(require,module,exports){
+},{"./doctests.js":9}],29:[function(require,module,exports){
 /*
  *  Title: Test for obsolete 'Summary' heading.
  *
@@ -1440,7 +1467,7 @@ exports.summaryHeading = {
   }
 };
 
-},{"./doctests.js":8}],29:[function(require,module,exports){
+},{"./doctests.js":9}],30:[function(require,module,exports){
 /*
  *  Title: Test for obsolete macro parameters.
  *
@@ -1504,7 +1531,7 @@ exports.unnecessaryMacroParams = {
   }
 };
 
-},{"./doctests.js":8}],30:[function(require,module,exports){
+},{"./doctests.js":9}],31:[function(require,module,exports){
 /*
  *  Title: Test for incorrectly used URLs in link titles.
  *
@@ -1553,7 +1580,7 @@ exports.urlInLinkTitle = {
   }
 };
 
-},{"./doctests.js":8}],31:[function(require,module,exports){
+},{"./doctests.js":9}],32:[function(require,module,exports){
 /*
  *  Title: Test for incorrect line highlights in code examples.
  *
@@ -1664,7 +1691,7 @@ exports.wrongHighlightedLine = {
   }
 };
 
-},{"./doctests.js":8}],32:[function(require,module,exports){
+},{"./doctests.js":9}],33:[function(require,module,exports){
 /*
  *  Title: Test for whether the 'syntax' class is properly used on a syntax block.
  *
@@ -1743,5 +1770,5 @@ exports.wrongSyntaxClass = {
   }
 };
 
-},{"./doctests.js":8}]},{},[16])(16)
+},{"./doctests.js":9}]},{},[17])(17)
 });
