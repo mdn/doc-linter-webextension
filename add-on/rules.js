@@ -1232,7 +1232,7 @@ exports.oldURLs = {
  *  <pre class="brush: js">var x = 1</pre>.
  *
  *  Implementation notes: This test checks all <pre> elements that have either an empty 'class'
- *  attribute or none at all.
+ *  attribute or none at all. It also checks for elements that have the class 'eval'
  */
 
 const WARNING = require('./doctests.js').WARNING;
@@ -1242,8 +1242,8 @@ exports.preWithoutClass = {
   name: "pre_without_class",
   desc: "pre_without_class_desc",
   check: function checkPreWithoutClass(rootElement) {
-    //let presWithoutClass = rootElement.querySelectorAll("pre:-moz-any(:not([class]), [class=''])");
-    let presWithoutClass = rootElement.querySelectorAll("pre :not([class]), pre [class='']");
+    let presWithoutClass = rootElement.querySelectorAll("pre:not([class]), pre[class='']");
+    let presWithEvalClass = rootElement.querySelectorAll("pre[class='eval']");
     let matches = [];
 
     for (let i = 0; i < presWithoutClass.length; i++) {
@@ -1262,6 +1262,13 @@ exports.preWithoutClass = {
       matches.push({
         msg: presWithoutClass[i].outerHTML,
         type
+      });
+    }
+
+    for(let i = 0; i < presWithEvalClass.length; i++) {
+      matches.push({
+        msg: presWithEvalClass[i].outerHTML,
+        type: ERROR
       });
     }
 
@@ -1404,10 +1411,6 @@ exports.styleAttribute = {
  *  Example 1: <h2>Summary</h2> is redundant, because the page title is shown above the article,
  *  so it should be removed.
  *
- *  Implementation notes: This test searches for all headings, which contain the text 'Summary'.
- *  In CSS articles the summary headings still need to be kept due to bug 1201600, though the test
- *  currently still marks them as errors (see issue #209). Also, summaries placed at the end of
- *  articles are incorrectly recognized as errors (see issue #208).
  */
 
 
@@ -1421,14 +1424,12 @@ exports.summaryHeading = {
     let headlines = rootElement.querySelectorAll("h1, h2, h3, h4, h5, h6");
     let matches = [];
 
-    for (let i = 0; i < headlines.length; i++) {
-      if (headlines[i].textContent.match(/^\s*Summary\s*$/)) {
-        matches.push({
-          node: headlines[i],
-          msg: headlines[i].outerHTML,
-          type: ERROR
-        });
-      }
+    if (headlines[0].textContent.match(/^\s*Summary\s*$/)) {
+      matches.push({
+        node: headlines[0],
+        msg: headlines[0].outerHTML,
+        type: ERROR
+      });
     }
 
     return matches;
