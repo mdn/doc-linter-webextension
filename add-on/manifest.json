@@ -30,11 +30,6 @@
     "activeTab",
     "webNavigation"
   ],
-
-  "page_action": {
-    "browser_style": true,
-    "default_icon":  "img/page_action_32.png",
-    "default_title": "__MSG_pageActionTitle__"
-  },
-  "version": "1.0.1"
+  
+  "version": "1.0.2"
 }
