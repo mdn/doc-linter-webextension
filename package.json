@@ -15,7 +15,7 @@
     "eslint-plugin-mocha": "4.11.0",
     "eslint-plugin-promise": "3.5.0",
     "fx-runner": "1.0.7",
-    "npm-run-all": "4.1.0",
+    "npm-run-all": "4.1.2",
     "virtualenv": "0.3.1",
     "web-ext": "2.0.0"
   },
