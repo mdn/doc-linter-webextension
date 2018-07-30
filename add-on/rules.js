@@ -841,6 +841,7 @@ exports.invalidMacros = {
       "embedlivesample",
       "embedyoutube",
       "event",
+      "eventref",
       "experimental_inline",
       "firefox_for_developers",
       "fx_minversion_inline",
